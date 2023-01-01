@@ -1,0 +1,15 @@
+@import 'sass/perfect-scrollbar.css';
+@import 'sass/custom-loader.css';
+@import 'sass/animate.css';
+@import 'sass/drag-drop/drag-drop.css';
+@import 'sass/elements/custom-typography.css';
+
+
+@import 'sass/font-icons/fontawesome/css/regular.css';
+@import 'sass/font-icons/fontawesome/css/fontawesome.css';
+@import 'sass/forms/bootstrap-slider.css';
+@import 'sass/forms/custom-flatpickr.css';
+@import 'sass/forms/custom-nouiSlider.css';
+@import 'sass/forms/file-upload-with-preview.min.css';
+
+@import 'sass/elements/color_library.css';
