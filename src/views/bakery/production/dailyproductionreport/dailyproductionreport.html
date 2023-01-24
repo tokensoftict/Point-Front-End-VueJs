@@ -1,0 +1,32 @@
+<div class="row layout-top-spacing">
+    <div class="col-12 layout-spacing">
+        <div class="panel br-6 statbox box box-shadow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>  Daily Production Report</h4>
+                        <div class="float-end">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <label for="currency"> Date</label>
+                                        <flat-pickr v-model="from" class="form-control form-control-sm flatpickr active" placeholder="Date"></flat-pickr>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label style="visibility: hidden">&nbsp;</label>
+                                    <app-button  :click="filterReport" ref="go">Go</app-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="custom-table panel-body p-0">
+                    <app-production :tableData="productionList" :options="options" :columns="columns"></app-production>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

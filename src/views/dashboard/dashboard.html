@@ -1,1 +1,18 @@
-<h1>Hello world</h1>
+<teleport to="body">
+    <div class="modal fade" id="creditorsPop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Creditors List</h5>
+                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="custom-table panel-body p-0">
+                        <v-client-table :data="creditorList" ref="customer_table" :columns="columns" :options="options">
+                        </v-client-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</teleport>

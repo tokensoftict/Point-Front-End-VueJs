@@ -24,7 +24,7 @@ export default {
     data() {
         return {
             name: "",
-            columns: ['firstname','lastname','company_name' ,'email', 'address','phone_number', 'action'],
+            columns: ['firstname','lastname','company_name' ,'email', 'address','phone_number', 'credit_balance','action'],
             tableData: [],
             options: {
                 perPage: 10,
@@ -57,6 +57,7 @@ export default {
 
 
     computed: {
+
         customerService() {
             return new CustomerService(this.$api)
         },
@@ -124,7 +125,7 @@ export default {
                         this.$notify({
                             title: "Point",
                             type: "success",
-                            text: "Manufacturer updated Successfully"
+                            text: "Customer updated Successfully"
                         });
                     })
                     .catch((response) => {
@@ -184,7 +185,7 @@ export default {
                         this.$notify({
                             title: "Point",
                             type: "success",
-                            text: "Manufacturer added Successfully"
+                            text: "Customer added Successfully"
                         });
                     })
                     .catch((response) => {

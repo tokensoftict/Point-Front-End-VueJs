@@ -1,0 +1,18 @@
+<div class="row layout-top-spacing">
+    <div class="col-12 layout-spacing">
+        <div class="panel br-6 statbox box box-shadow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>  Today's Completed Invoice</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="custom-table panel-body p-0">
+                    <app-invoice :tableData="invoiceList" :options="options" :columns="columns"></app-invoice>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

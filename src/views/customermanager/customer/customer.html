@@ -115,7 +115,7 @@
                 <div class="custom-table panel-body p-0">
                     <v-client-table :data="tableData" ref="customer_table" :columns="columns" :options="options">
 
-                        <template #beforeFilter>
+                        <template #beforeFilter v-if="$user.access.includes('/customerManager/newcustomers')">
                             <button class="btn me-2 btn-primary" @click="newModal.show()"
                             ><svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +138,7 @@
                         </template>
 
                         <template #action="props">
-                            <a href="javascript:;"  class=" btn btn-sm btn-primary" @click="edit(props.row)">
+                            <a href="javascript:;" v-if="$user.access.includes('/customerManager/editcustomers')" class=" btn btn-sm btn-primary" @click="edit(props.row)">
                                 <i class="far fa-1x fa-edit"></i>
                             </a>
 

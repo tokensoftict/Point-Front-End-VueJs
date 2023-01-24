@@ -1,0 +1,21 @@
+<div class="row layout-top-spacing">
+    <div class="col-12 layout-spacing">
+        <div class="panel br-6 statbox box box-shadow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>  Today's Payment By Method</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="custom-table panel-body p-0">
+                    <div v-for="key in keys">
+                        <h4>{{ key }}'S PAYMENTS</h4>
+                        <app-payment-method :tableData="payments[key]" :options="options" :columns="columns"></app-payment-method>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -108,10 +108,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
                             </div>
                         </div>
                     </div>
@@ -123,11 +119,11 @@
                                 <div class="col-xl-12 col-md-3 col-sm-6">
                                     <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print">Print</a>
                                 </div>
-                                <div class="col-xl-12 col-md-3 col-sm-6">
-                                    <router-link v-if="purchase.status.name !== 'Complete'" :to="{name : 'edit-purchase-Material', params: {id: purchase.id, purchase_order : 'hello world'}}" class="btn btn-dark btn-edit">Edit</router-link>
+                                <div class="col-xl-12 col-md-3 col-sm-6" v-if="$user.access.includes('/bakeryManager/purchase/:id/edit') && purchase.status.name !== 'Complete'">
+                                    <router-link  :to="{name : 'edit-purchase-Material', params: {id: purchase.id, purchase_order : 'hello world'}}" class="btn btn-dark btn-edit">Edit</router-link>
                                 </div>
-                                <div class="col-xl-12 col-md-3 col-sm-6">
-                                    <app-button design="primary" ref="complete_button" :click="completeInvoice" class="btn-edit mt-3" style="width: 100%" v-if="purchase.status.name !== 'Complete'">Complete Purchase</app-button>
+                                <div class="col-xl-12 col-md-3 col-sm-6" v-if="$user.access.includes('/bakeryManager/purchase/:id/edit') && purchase.status.name !== 'Complete'">
+                                    <app-button  design="primary" ref="complete_button" :click="completeInvoice" class="btn-edit mt-3" style="width: 100%" v-if="purchase.status.name !== 'Complete'">Complete Purchase</app-button>
                                 </div>
                             </div>
                         </div>

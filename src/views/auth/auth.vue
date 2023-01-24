@@ -41,8 +41,6 @@ export default {
 
                 this.$user.login(this,loginData).then((response)=>{
 
-                    obj.$refs.submit_button.toggleProcessing();
-
                     this.$helper.success(
                         this.$notify,
                         "Authentication",

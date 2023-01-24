@@ -45,7 +45,7 @@ export default {
 
         systemSettings()
         {
-            return useUserStore().refresh().settings.store
+            return useUserStore().refresh().settings;
         }
 
     },

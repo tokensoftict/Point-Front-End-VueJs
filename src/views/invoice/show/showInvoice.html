@@ -1,0 +1,131 @@
+<div class="row layout-top-spacing">
+    <div class="col-4 layout-spacing">
+        <div class="panel br-6 statbox box box-shadow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>Invoice Details</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="custom-table panel-body p-0">
+                    <h4>Bill To</h4>
+                    <div id="customer_info" class="text-success mt-3" v-if="selectedCustomer.name !== ''">
+                        <b>{{ selectedCustomer.name }}</b><br/>
+                        <span class="text-primary" v-if=" selectedCustomer.phone_number.length >0 ||  selectedCustomer.email.length >0">{{ selectedCustomer.phone_number }} | {{ selectedCustomer.email }}</span>
+                        <span v-if="selectedCustomer.address.length > 0"><br/>{{ selectedCustomer.address }}</span>
+                    </div>
+
+                    <br/>
+
+                    <h4>Invoice Property</h4>
+                    <br/>
+                    <div class="form-group">
+                        <label>Invoice Number</label><br>
+                        <b>{{ invoice_number}}</b>
+                    </div>
+
+                    <br/>
+
+                    <div class="form-group">
+                        <label>Status</label><br>
+                        <span :class="'badge badge-'+status.label" label-form="">{{ status.name }}</span>
+                    </div>
+
+                    <br/>
+
+                    <div class="form-group">
+                        <label >Invoice Date</label><br>
+                        <label > {{ invoice_date }}</label>
+                    </div>
+
+                    <br/>
+
+                    <div class="form-group">
+                        <label >Time</label><br>
+                        <label >{{ time }}</label>
+                    </div>
+
+                    <br/>
+
+                    <div class="form-group">
+                        <label >Sales Representative</label><br>
+                        <label >{{ created_by }}</label>
+                    </div>
+
+                    <br/>
+                    <div class="form-group">
+                        <label >Total Number of Item Bought</label><br>
+                        <label >{{ products.length }}</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8 layout-spacing">
+        <div class="panel br-6 statbox box box-shadow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>Invoice Items</h4>
+                        <br/>
+                        <div class="table-responsive">
+                            <table class="table table-condensed table-striped  table-responsive table-bordered" style="font-size: 11px;">
+                                <thead>
+                                <tr>
+                                    <th class="text-center" >#</th>
+                                    <th class="text-left" >Product</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-right">Price</th>
+                                    <th class="text-right">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody id="appender">
+                                <tr v-for="(product,index) in products">
+                                    <td class="text-center">{{ index + 1 }}</td>
+                                    <td class="text-left">
+                                        {{ product.name }}
+                                    </td>
+                                    <td class="text-center">
+                                       {{ product.selling_quantity }}
+                                    </td>
+                                    <td class="text-right">{{ $currency(product.selling_price) }}</td>
+                                    <td class="text-right">{{ $currency((product.selling_price * product.selling_quantity)) }}</td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+
+                                    <th class="text-center"></th>
+                                    <th class="text-center"></th>
+                                    <th class="text-right"></th>
+                                    <th class="text-right">Sub Total</th>
+                                    <th class="text-right">{{ $currency(invoiceTotal)}}</th>
+                                </tr>
+                                <tr>
+
+                                    <th class="text-center"></th>
+                                    <th class="text-center"></th>
+                                    <th class="text-right"></th>
+                                    <th class="text-right">Total</th>
+                                    <th class="text-right total_invoice" style="font-size: 15px;">{{ $currency(invoiceTotal)}}</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="custom-table panel-body p-0">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

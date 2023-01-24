@@ -5,7 +5,7 @@
         'form-control form-control-sm' : design === 'sm',
         'form-control form-control-lg' : design === 'lg',
     }"  @input="handleInput">
-        <option value="">{{ placeholder }}</option>
+        <option v-if="placeholder.length > 0" value="">{{ placeholder }}</option>
         <option v-for="item in items" :value="item.id">{{ item.name ? item.name : item.text }}</option>
     </select>
 

@@ -6,16 +6,16 @@
                 <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard" aria-controls="dashboard" aria-expanded="false">
                     <div class="">
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-home"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-home"
                         >
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -24,16 +24,16 @@
                     </div>
                     <div>
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-chevron-right"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
                         >
                             <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>
@@ -48,20 +48,20 @@
                 </ul>
 
             </li>
-            <li class="menu">
+            <li class="menu" v-if="$user.hasModuleAccess('/stock/')" >
                 <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#stocks" aria-controls="datatables" aria-expanded="false">
                     <div class="">
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-layers"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-layers"
                         >
                             <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                             <polyline points="2 17 12 22 22 17"></polyline>
@@ -71,16 +71,16 @@
                     </div>
                     <div>
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-chevron-right"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
                         >
                             <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>
@@ -89,35 +89,35 @@
 
                 <ul id="stocks" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
 
-                    <li>
-                        <router-link to="/stock/new">New Stock</router-link>
+                    <li v-if="$user.access.includes('/stock/new')">
+                        <router-link  to="/stock/new">New Stock</router-link>
                     </li>
-                    <li>
+                    <li v-if="$user.access.includes('/stock/list')">
                         <router-link to="/stock/list">List Stock</router-link>
                     </li>
-                    <li>
+                    <li v-if="$user.access.includes('/stock/available')">
                         <router-link to="/stock/available">Available Stock</router-link>
                     </li>
-                    <li>
+                    <li v-if="$user.access.includes('/stock/disabled')">
                         <router-link to="/stock/disabled">Disabled Stock</router-link>
                     </li>
                 </ul>
 
             </li>
-            <li class="menu">
+            <li class="menu" v-if="$user.hasModuleAccess('/customerManager/')">
                 <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#customer" aria-controls="customer" aria-expanded="false">
                     <div class="">
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-layers"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-layers"
                         >
                             <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                             <polyline points="2 17 12 22 22 17"></polyline>
@@ -127,16 +127,16 @@
                     </div>
                     <div>
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-chevron-right"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
                         >
                             <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>
@@ -145,29 +145,33 @@
 
                 <ul id="customer" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
 
-                    <li>
+                    <li v-if="$user.access.includes('/customerManager/customers')">
                         <router-link to="/customerManager/customers">Customer Manager</router-link>
                     </li>
-                    `
-
+                    <li v-if="$user.access.includes('/customerManager/balancesheet')">
+                        <router-link to="/customerManager/balancesheet">Balance Sheet</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/customerManager/addcreditpayment')">
+                        <router-link to="/customerManager/addcreditpayment">Credit Payment</router-link>
+                    </li>
 
                 </ul>
 
             </li>
-            <li class="menu">
+            <li class="menu" v-if="$user.hasModuleAccess('/bakeryManager/rawmaterials')">
                 <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#datatables" aria-controls="datatables" aria-expanded="false">
                     <div class="">
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-layers"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-layers"
                         >
                             <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                             <polyline points="2 17 12 22 22 17"></polyline>
@@ -177,16 +181,16 @@
                     </div>
                     <div>
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-chevron-right"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
                         >
                             <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>
@@ -195,10 +199,10 @@
 
                 <ul id="datatables" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
 
-                    <li>
+                    <li v-if="$user.access.includes('/bakeryManager/rawmaterials')">
                         <router-link to="/bakeryManager/rawmaterials">Material Manager</router-link>
                     </li>
-                    <li>
+                    <li v-if="$user.access.includes('/bakeryManager/rawmaterials/availability')">
                         <router-link to="/bakeryManager/rawmaterials/availability">Available Material</router-link>
                     </li>
 
@@ -207,8 +211,7 @@
                 </ul>
 
             </li>
-
-            <li class="menu">
+            <li class="menu" v-if="$user.hasModuleAccess('/bakeryManager/purchase')">
                 <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#purchase_material" aria-controls="production" aria-expanded="false">
                     <div class="">
                         <svg
@@ -227,7 +230,7 @@
                             <polyline points="2 17 12 22 22 17"></polyline>
                             <polyline points="2 12 12 17 22 12"></polyline>
                         </svg>
-                        <span>Material Purchase</span>
+                        <span>Purchase</span>
                     </div>
                     <div>
                         <svg
@@ -249,16 +252,16 @@
 
                 <ul id="purchase_material" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
 
-                    <li>
+                    <li v-if="$user.access.includes('/bakeryManager/purchase/add')">
                         <router-link to="/bakeryManager/purchase/add">New Purchases</router-link>
                     </li>
-                    <li>
+                    <li v-if="$user.access.includes('/bakeryManager/purchase/list')">
                         <router-link to="/bakeryManager/purchase/list">Today's Purchases</router-link>
                     </li>
                 </ul>
 
             </li>
-            <li class="menu">
+            <li class="menu" v-if="$user.hasModuleAccess('/bakeryManager/transfer')">
                 <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#transfer" aria-controls="production" aria-expanded="false">
                     <div class="">
                         <svg
@@ -299,26 +302,26 @@
 
                 <ul id="transfer" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
 
-                    <li>
-                        <router-link to="/bakeryManager/transfer/list">Today's Transfers</router-link>
+                    <li v-if="$user.access.includes('/bakeryManager/transfer/list')">
+                        <router-link to="/bakeryManager/transfer/list">Material Transfer</router-link>
                     </li>
                 </ul>
 
             </li>
-            <li class="menu">
+            <li class="menu" v-if="$user.hasModuleAccess('/bakeryManager/production')">
                 <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#production" aria-controls="production" aria-expanded="false">
                     <div class="">
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-layers"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-layers"
                         >
                             <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                             <polyline points="2 17 12 22 22 17"></polyline>
@@ -328,16 +331,16 @@
                     </div>
                     <div>
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-chevron-right"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
                         >
                             <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>
@@ -346,29 +349,371 @@
 
                 <ul id="production" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
 
-                    <li>
+                    <li v-if="$user.access.includes('/bakeryManager/production/new')">
                         <router-link to="/bakeryManager/production/new">New Production</router-link>
                     </li>
-                    <li>
+                    <li v-if="$user.access.includes('/bakeryManager/productions/list')">
                         <router-link to="/bakeryManager/productions/list">Today's Production</router-link>
                     </li>
                 </ul>
 
             </li>
-            <li class="menu">
+            <li class="menu" v-if="$user.hasModuleAccess('/invoice/new') || $user.hasModuleAccess('/invoice/completed') || $user.hasModuleAccess('/payment/listpaymentbymethod') ">
+                <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#invoicing" aria-controls="invoicing" aria-expanded="false">
+                    <div class="">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-layers"
+                        >
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                        <span>Invoice</span>
+                    </div>
+                    <div>
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
+                        >
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+
+                <ul id="invoicing" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
+
+                    <li v-if="$user.access.includes('/invoice/new')">
+                        <router-link to="/invoice/new">New Invoice</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/invoice/draft')">
+                        <router-link to="/invoice/draft" >Draft Invoice</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/invoice/completed')">
+                        <router-link to="/invoice/completed">Completed Invoice</router-link>
+                    </li>
+                </ul>
+
+            </li>
+            <li class="menu"  v-if="$user.hasModuleAccess('/invoice/new') || $user.hasModuleAccess('/payment/listpayment') || $user.hasModuleAccess('/payment/new') ">
+                <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#payment" aria-controls="invoicing" aria-expanded="false">
+                    <div class="">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-layers"
+                        >
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                        <span>Payment Manager</span>
+                    </div>
+                    <div>
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
+                        >
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+
+                <ul id="payment" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
+
+                    <li v-if="$user.access.includes('/payment/new')">
+                        <router-link to="/payment/new">New Payment</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/payment/listpayment')">
+                        <router-link to="/payment/listpayment" >Today's Payment</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/payment/listpaymentbymethod')">
+                        <router-link to="/payment/listpaymentbymethod">Payment By Method</router-link>
+                    </li>
+                </ul>
+
+            </li>
+            <li class="menu"  v-if="$user.hasModuleAccess('/invoice/report')">
+                <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#invoiceReport" aria-controls="invoicing" aria-expanded="false">
+                    <div class="">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-layers"
+                        >
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                        <span>Invoice Report</span>
+                    </div>
+                    <div>
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
+                        >
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+
+                <ul id="invoiceReport" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
+
+                    <li v-if="$user.access.includes('/invoice/report/daily')">
+                        <router-link to="/invoice/report/daily">Daily Invoice</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/invoice/report/weekly')">
+                        <router-link to="/invoice/report/weekly">Weekly Invoice</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/invoice/report/monthly')">
+                        <router-link to="/invoice/report/monthly" >Monthly Invoice</router-link>
+                    </li>
+
+                    <li v-if="$user.access.includes('/invoice/report/monthly/user')">
+                        <router-link to="/invoice/report/monthly/user" >Invoice By User</router-link>
+                    </li>
+
+                    <li v-if="$user.access.includes('/invoice/report/monthly/customer')">
+                        <router-link to="/invoice/report/monthly/customer" >Invoice By Customer</router-link>
+                    </li>
+
+                </ul>
+
+            </li>
+            <li class="menu"  v-if="$user.hasModuleAccess('/bakeryManager/production/report')">
+                <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#productionReport" aria-controls="productionReport" aria-expanded="false">
+                    <div class="">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-layers"
+                        >
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                        <span>Production Report</span>
+                    </div>
+                    <div>
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
+                        >
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+
+                <ul id="productionReport" class="collapse submenu list-unstyled" data-bs-parent="#productionReport">
+
+                    <li v-if="$user.access.includes('/bakeryManager/production/report/daily')">
+                        <router-link to="/bakeryManager/production/report/daily">Daily Production</router-link>
+                    </li>
+                    <li  v-if="$user.access.includes('/bakeryManager/production/report/weekly')">
+                        <router-link to="/bakeryManager/production/report/weekly">Weekly Payment</router-link>
+                    </li>
+                    <li  v-if="$user.access.includes('/bakeryManager/production/report/monthly')">
+                        <router-link to="/bakeryManager/production/report/monthly" >Monthly Payment</router-link>
+                    </li>
+
+                    <li v-if="$user.access.includes('/bakeryManager/production/report/monthly/user')">
+                        <router-link to="/bakeryManager/production/report/monthly/user" >Monthly By User</router-link>
+                    </li>
+
+                </ul>
+
+            </li>
+            <li class="menu" v-if="$user.hasModuleAccess('/bakeryManager/purchase/report')">
+                <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#purchaseReport" aria-controls="purchaseReport" aria-expanded="false">
+                    <div class="">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-layers"
+                        >
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                        <span>Purchase Report</span>
+                    </div>
+                    <div>
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
+                        >
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+
+                <ul id="purchaseReport" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
+
+                    <li v-if="$user.access.includes('/bakeryManager/purchase/report/daily')">
+                        <router-link to="/bakeryManager/purchase/report/daily">Daily Purchase</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/bakeryManager/purchase/report/weekly')">
+                        <router-link to="/bakeryManager/purchase/report/weekly">Weekly Purchase</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/bakeryManager/purchase/report/monthly')">
+                        <router-link to="/bakeryManager/purchase/report/monthly" >Monthly Purchase</router-link>
+                    </li>
+
+                    <li v-if="$user.access.includes('/bakeryManager/purchase/report/monthly/supplier')">
+                        <router-link to="/bakeryManager/purchase/report/monthly/supplier" >Purchase By Supplier</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/bakeryManager/purchase/report/monthly/user')">
+                        <router-link to="/bakeryManager/purchase/report/monthly/user" >Purchase By User</router-link>
+                    </li>
+
+                </ul>
+
+            </li>
+            <li class="menu" v-if="$user.hasModuleAccess('/access-control/')">
+                <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#access-control" aria-controls="apps" aria-expanded="false">
+                    <div class="">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-cpu"
+                        >
+                            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                            <rect x="9" y="9" width="6" height="6"></rect>
+                            <line x1="9" y1="1" x2="9" y2="4"></line>
+                            <line x1="15" y1="1" x2="15" y2="4"></line>
+                            <line x1="9" y1="20" x2="9" y2="23"></line>
+                            <line x1="15" y1="20" x2="15" y2="23"></line>
+                            <line x1="20" y1="9" x2="23" y2="9"></line>
+                            <line x1="20" y1="14" x2="23" y2="14"></line>
+                            <line x1="1" y1="9" x2="4" y2="9"></line>
+                            <line x1="1" y1="14" x2="4" y2="14"></line>
+                        </svg>
+                        <span>Access Control</span>
+                    </div>
+                    <div>
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
+                        >
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+                <ul id="access-control" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
+                    <li v-if="$user.access.includes('/access-control/groups')">
+                        <router-link to="/access-control/groups">User Group</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/access-control/users')">
+                        <router-link to="/access-control/users">System Users</router-link>
+                    </li>
+                </ul>
+
+            </li>
+            <li class="menu" v-if="$user.hasModuleAccess('/settings/')">
                 <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#apps" aria-controls="apps" aria-expanded="false">
                     <div class="">
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-cpu"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-cpu"
                         >
                             <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
                             <rect x="9" y="9" width="6" height="6"></rect>
@@ -385,44 +730,41 @@
                     </div>
                     <div>
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-chevron-right"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
                         >
                             <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>
                     </div>
                 </a>
                 <ul id="apps" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
-                    <li>
+                    <li v-if="$user.access.includes('/settings/store')">
                         <router-link to="/settings/store">System Settings</router-link>
                     </li>
-                    <li>
-                        <router-link to="/settings/users">System Users</router-link>
-                    </li>
-                    <li>
+                    <li v-if="$user.access.includes('/settings/manufacturer')">
                         <router-link to="/settings/manufacturer">Manufacturer</router-link>
                     </li>
-                    <li>
+                    <li v-if="$user.access.includes('/settings/productcategory')">
                         <router-link to="/settings/productcategory">Category</router-link>
                     </li>
-                    <li>
+                    <!--<li v-if="$user.access.includes('/settings/expensestype')">
                         <router-link to="/settings/expensestype">Expenses Type</router-link>
-                    </li>
-                    <li>
+                    </li>-->
+                    <li v-if="$user.access.includes('/settings/payment_method')">
                         <router-link to="/settings/payment_method">Payment Method</router-link>
                     </li>
-                    <li>
+                    <li v-if="$user.access.includes('/settings/suppliers')">
                         <router-link to="/settings/suppliers">Suppliers</router-link>
                     </li>
-                    <li>
+                    <li v-if="$user.access.includes('/settings/banks')">
                         <router-link to="/settings/banks">Banks</router-link>
                     </li>
                 </ul>

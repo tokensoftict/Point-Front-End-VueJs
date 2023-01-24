@@ -12,8 +12,12 @@
             Header,
             Footer,
             Sidebar,
-        }
+        },
 
+        mounted() {
+            window.loading = document.getElementById('loader');
+            window.application = document.getElementById('application');
+        }
     }
 </script>
 

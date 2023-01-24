@@ -1,8 +1,10 @@
+import {AccessControl} from "../../accesscontrol/access-control";
 
 export class ProductionService {
 
     constructor(http) {
         this.$http = http;
+        this.$accessControl = new AccessControl(this.$http);
     }
 
 
@@ -37,6 +39,24 @@ export class ProductionService {
         }
 
         return this.$http.post("bakeryManager/production/"+id+"/update",data);
+    }
+
+    complete(data,id)
+    {
+        if(data instanceof FormData) {
+            data.set("_method", "PUT");
+        }
+        else {
+            data['_method'] = "PUT";
+        }
+
+        console.log(data);
+        return this.$http.post("bakeryManager/production/"+id+"/complete",data);
+    }
+
+    custom(filter)
+    {
+        return this.$http.post("bakeryManager/production/custom",filter);
     }
 
 }

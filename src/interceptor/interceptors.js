@@ -7,6 +7,7 @@ const instance = axios.create()
 
 instance.interceptors.request.use(function (request) {
 
+
     let user =  useUserStore();
 
     if(user.token === false) {
@@ -51,9 +52,17 @@ instance.interceptors.request.use(function (request) {
 instance.interceptors.response.use((response) => response, (error) => {
     // whatever you want to do with the error
 
+    let user =  useUserStore();
+
+    if(user.token === false) {
+        user.refresh();
+    }
+
    const  error_codes = ['500']
 
     if(error.response.data.message !== undefined && error.response.data.message === "Unauthenticated." && error.response.status !== 422 ){
+
+
 
         notify({
             title: "Authorization",
@@ -62,7 +71,8 @@ instance.interceptors.response.use((response) => response, (error) => {
             duration: 50000,
         });
         setTimeout(()=>{
-            location.href = window.base_url;
+            //location.href = window.location.origin;
+            user.logout();
         },2000);
 
         return Promise.reject(error);

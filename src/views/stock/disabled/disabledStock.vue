@@ -24,6 +24,23 @@ export default {
         'app-select': select
     },
 
+  methods:{
+    toggle(id)
+    {
+      this.stockService.toggle(id).then(()=>{
+        this.get()
+      });
+    },
+    get()
+    {
+      this.stockService.disabled().then((response) => {
+
+        this.tableData = response.data.data.data;
+        this.columns =  response.data.data.columns;
+      });
+    }
+  },
+
     data() {
         return {
             name: "",
@@ -80,11 +97,7 @@ export default {
 
     mounted() {
 
-        this.stockService.disabled().then((response) => {
-            this.columns =  response.data.data.columns;
-            this.tableData = response.data.data.data;
-
-        });
+        this.get();
 
     }
 

@@ -29,13 +29,20 @@ export default {
       });
       return purchase_total;
     },
+    extimate_product_total(){
+      let product_total = 0;
+      this.product_Items.forEach((item,index) => {
+        product_total += (item.estimate_quantity * item.selling_price);
+      });
+      return product_total;
+    },
     product_total(){
       let product_total = 0;
       this.product_Items.forEach((item,index) => {
         product_total += (item.quantity * item.selling_price);
       });
       return product_total;
-    }
+    },
   },
 
   data(){
@@ -50,7 +57,13 @@ export default {
         id : "",
         status : {
           name : ""
-        }
+        },
+        created_by : {
+          name : ""
+        },
+        completed_by : {
+          name : ""
+        },
       }
     }
   },

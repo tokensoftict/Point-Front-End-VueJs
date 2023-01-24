@@ -4,8 +4,13 @@
 
 <script>
 import {PurchaseService} from "../purchase-service";
+import purchase from "../../../../components/html/purchase.vue";
 
 export default {
+
+    components: {
+      'app-purchase': purchase
+    },
 
     data(){
         return {

@@ -4,7 +4,7 @@ export default {
     },
 
     production : {
-        baseUrl : '',
+        baseUrl : 'http://post.softybread.com.ng/api/',
     },
 
 }

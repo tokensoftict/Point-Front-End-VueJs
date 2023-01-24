@@ -90,6 +90,8 @@
 
                                                                                                                 <p class="inv-customer-name"> Remark: {{ remark }}</p>
 
+                                                                                                                <p class="inv-customer-name"> Status: {{ production.status.label }}</p>
+
                                                                                                             </div>
 
                                                                                                             <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1">
@@ -150,7 +152,7 @@
                                                                                                                 <thead>
                                                                                                                 <tr>
                                                                                                                     <th class="text-start">Product Name</th>
-                                                                                                                    <th class="text-center">Quantity</th>
+                                                                                                                    <th class="text-center">Ext. Quantity</th>
                                                                                                                     <th class="text-center">Selling Price</th>
                                                                                                                     <th class="text-end">Total</th>
                                                                                                                 </tr>
@@ -158,9 +160,9 @@
                                                                                                                 <tbody>
                                                                                                                 <tr v-for="(product_item, index) in product_Items">
                                                                                                                     <td class="text-left">{{ (product_item.name) }}</td>
-                                                                                                                    <td class="text-center">{{ (product_item.quantity) }}</td>
+                                                                                                                    <td class="text-center">{{ (product_item.estimate_quantity) }}</td>
                                                                                                                     <td class="text-center">{{ $currency(product_item.selling_price) }}</td>
-                                                                                                                    <td class="text-end">{{ $currency((product_item.selling_price * product_item.quantity))  }}</td>
+                                                                                                                    <td class="text-end">{{ $currency((product_item.selling_price * product_item.estimate_quantity))  }}</td>
                                                                                                                 </tr>
                                                                                                                 </tbody>
                                                                                                                 <tfoot>
@@ -168,7 +170,7 @@
                                                                                                                     <td></td>
                                                                                                                     <td></td>
                                                                                                                     <td class="text-end">Total</td>
-                                                                                                                    <td class="text-end" id="total_po">{{ $currency(product_total) }}</td>
+                                                                                                                    <td class="text-end" id="total_po">{{ $currency(estimate_product_total) }}</td>
                                                                                                                 </tr>
                                                                                                                 </tfoot>
                                                                                                             </table>
@@ -233,18 +235,18 @@
                                                                                 <thead>
                                                                                 <tr>
                                                                                     <th class="text-start">Product Name</th>
-                                                                                    <th class="text-center">Quantity</th>
+                                                                                    <th class="text-center">Ext. Quantity</th>
                                                                                     <th class="text-center">Selling Price</th>
-                                                                                    <th class="text-center">Total</th>
+                                                                                    <th class="text-center">Ex. Total</th>
                                                                                     <th class="text-end">Action</th>
                                                                                 </tr>
                                                                                 </thead>
                                                                                 <tbody>
                                                                                 <tr v-for="(product_item, index) in product_Items">
                                                                                     <td class="text-left">{{ (product_item.name) }}</td>
-                                                                                    <td class="text-center">{{ (product_item.quantity) }}</td>
+                                                                                    <td class="text-center">{{ (product_item.estimate_quantity) }}</td>
                                                                                     <td class="text-center">{{ $currency(product_item.selling_price) }}</td>
-                                                                                    <td class="text-center">{{ $currency((product_item.selling_price * product_item.quantity))  }}</td>
+                                                                                    <td class="text-center">{{ $currency((product_item.selling_price * product_item.estimate_quantity))  }}</td>
                                                                                     <td class="text-right">
                                                                                         <button @click="removeProduct(index)" class="btn btn-sm btn-danger float-end">Remove</button>
                                                                                     </td>
@@ -256,7 +258,7 @@
                                                                                     <td></td>
                                                                                     <td></td>
                                                                                     <td class="text-end">Total</td>
-                                                                                    <td class="text-end" id="total_po">{{ $currency(product_total) }}</td>
+                                                                                    <td class="text-end" id="total_po">{{ $currency(estimate_product_total) }}</td>
                                                                                     <td></td>
                                                                                 </tr>
                                                                                 </tfoot>
@@ -360,7 +362,7 @@
                                                         <div class="wizard-footer-right">
                                                             <wizard-button v-if="!props.isLastStep" @click.native="props.nextTab()" class="wizard-footer-right" :style="props.fillButtonStyle">Next</wizard-button>
 
-                                                            <wizard-button  ref="complete_button" v-else @click.native="completeProduction" class="wizard-footer-right finish-button" :style="props.fillButtonStyle">  {{props.isLastStep ? 'Save Production' : 'Next'}} <span v-if="isSubmittedLoading" class="spinner-border text-white me-2 align-self-center loader-sm"></span></wizard-button>
+                                                            <wizard-button :disabled="isSubmittedLoading === true" ref="complete_button" v-else @click.native="completeProduction" class="wizard-footer-right finish-button" :style="props.fillButtonStyle">  {{props.isLastStep ? 'Save Production' : 'Next'}} <span v-if="isSubmittedLoading" class="spinner-border text-white me-2 align-self-center loader-sm"></span></wizard-button>
                                                         </div>
                                                     </template>
 

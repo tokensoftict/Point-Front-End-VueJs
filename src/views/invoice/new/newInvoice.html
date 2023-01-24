@@ -1,0 +1,245 @@
+
+<teleport to="body">
+    <div class="modal fade" id="newCustomer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Customer</h5>
+                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <form ref="newform">
+
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <app-textbox ref="firstname" :design="'sm'" key="firstname" :validate="true" :error-msg="'Enter First Name'"  :name="'firstname'"  :type="'text'"  :model="'firstname'" :placeholder="'First Name'"></app-textbox>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Lastname</label>
+                            <app-textbox ref="lastname" validate="'true'" :design="'sm'" key="lastname"  :name="'lastname'"  :error-msg="'Enter Last Name'" :type="'text'"  :model="'lastname'" :placeholder="'Lastname'"></app-textbox>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Company</label>
+                            <app-textbox ref="company_name" :design="'sm'" key="company_name"  :name="'company_name'"  :type="'text'"  :model="'company_name'" :placeholder="'Company Name'"></app-textbox>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <app-textbox ref="phone_number" validate="'true'" :design="'sm'" key="phone_number"  :name="'phone_number'"  :error-msg="'Enter Phone Number'" :type="'text'"  :model="'phone_number'" :placeholder="'Phone Number'"></app-textbox>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <app-textbox ref="email" :design="'sm'" key="email"  :name="'email'"  :type="'text'"  :model="'email'" :placeholder="'Email Address'"></app-textbox>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Address</label>
+                            <app-textarea ref="address" :design="'sm'" key="address"  :name="'address'"  :type="'text'"  :model="'address'" :placeholder="'Address'"></app-textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <app-button ref="submit_button"  :click="save">Save</app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</teleport>
+<div class="layout-px-spacing apps-invoice-add">
+    <div class="row invoice layout-top-spacing layout-spacing">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="doc-container">
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="statbox panel box box-shadow">
+                            <div class="panel-body">
+                                <div class="col-sm-12" style="position:relative;">
+                                    <div class="form-group">
+                                        <label for="ac-demo">Search For Product or Scan Bar Code</label>
+                                        <input v-model="searchbox" @input="productSearch" style="margin-bottom: 0" class="form-control form-control-lg "  placeholder="Product Barcode, Product Name...">
+
+                                    </div>
+
+                                    <div class="np-result-container" v-if="filteredResult.length > 0">
+                                        <div >
+                                            <div
+                                                    v-for="(result, resultIndex) in filteredResult"
+                                                    :key="resultIndex"
+                                            >
+                                                <div class="np-result-item" @click="addProduct(result)">
+                                                    <div class="np-ib np-text-container">
+                                                        <div>
+                                                            {{ result.name }}
+                                                        </div>
+                                                        <div class="np-result-description">
+                                                            Selling price : {{ $currency(result.selling_price) }}
+                                                            &nbsp; &nbsp;
+                                                           Available Quantity : {{ result.quantity }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="statbox panel box box-shadow mt-3">
+                            <div class="panel-body">
+                                <h4>Invoice Items</h4>
+                                <br/>
+                                <div class="table-responsive">
+                                <table class="table table-condensed table-striped  table-responsive table-bordered" style="font-size: 11px;">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="text-center" >#</th>
+                                        <th class="text-left" >Product</th>
+                                        <th class="text-center">Ava. Quantity</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-right">Price</th>
+                                        <th class="text-right">Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="appender">
+                                        <tr v-for="(product,index) in products">
+                                            <td class="text-center">
+                                                <a @click="removeItem(index)" class="delete-item text-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a>
+                                            </td>
+                                            <td class="text-center">{{ index + 1 }}</td>
+                                            <td class="text-left">
+                                                {{ product.name }}
+                                            </td>
+                                            <td class="text-center">{{ product.quantity}}</td>
+                                            <td class="text-center">
+                                                <div class="input-group">
+                                                    <button type="button" class="btn btn-primary btn-sm"
+                                                            @click="() => {products[index]['selling_quantity']--;}"
+                                                    >
+                                                        <svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img" aria-label="dash" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-dash b-icon bi"><g transform="translate(8 8) scale(1.25 1.25) translate(-8 -8)"><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"></path></g></svg>
+                                                    </button>
+
+                                                <app-number-spinner style="width:40px" class="form-control form-control-sm  text-dark" v-model="products[index]['selling_quantity']" :min="1" :max="products[index]['quantity']" />
+                                                    <button
+                                                            type="button"
+                                                            class="btn btn-primary btn-sm"
+                                                            @click="() => {products[index]['selling_quantity']++;}"
+                                                    >
+                                                        <svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img" aria-label="plus" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-plus b-icon bi"><g transform="translate(8 8) scale(1.25 1.25) translate(-8 -8)"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path></g></svg>
+                                                    </button>
+                                                </div>
+                                                <span class="d-block mt-2" style="font-size: 8px;color:red" v-if="products[index]['error'] !== false">{{ products[index]['error'] }}</span>
+                                            </td>
+                                            <td class="text-right">{{ $currency(product.selling_price) }}</td>
+                                            <td class="text-right">{{ $currency((product.selling_price * product.selling_quantity)) }}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th class="text-center"></th>
+                                        <th class="text-center"></th>
+                                        <th class="text-center"></th>
+                                        <th class="text-center"></th>
+                                        <th class="text-right"></th>
+                                        <th class="text-right">Sub Total</th>
+                                        <th class="text-right">{{ $currency(invoiceTotal)}}</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center"></th>
+                                        <th class="text-center"></th>
+                                        <th class="text-center"></th>
+                                        <th class="text-center"></th>
+                                        <th class="text-right"></th>
+                                        <th class="text-right">Total</th>
+                                        <th class="text-right total_invoice" style="font-size: 15px;">{{ $currency(invoiceTotal)}}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="statbox panel box box-shadow">
+                            <div class="panel-body">
+                                <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 v-if="$user.access.includes('/customerManager/newcustomers')">
+                                        Bill To
+                                        <button type="button" @click="newModal.show()" class="btn btn-sm btn-primary float-end"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add Customer
+                                        </button>
+                                    </h4>
+
+                                    <div class="form-group mt-5" style="position: relative">
+                                        <label>Search For Customer :</label>
+                                        <input class="form-control form-control-sm" @input="customerSearch" v-model="customerbox" placeholder="Phone, Email Address, Full name" >
+                                        <div class="np-result-container mt-2" v-if="filteredCustomer.length > 0">
+                                            <div >
+                                                <div
+                                                        v-for="(result, resultIndex) in filteredCustomer"
+                                                        :key="resultIndex"
+                                                >
+                                                    <div class="np-result-item" @click="selectCustomer(result)">
+                                                        <div class="np-ib np-text-container">
+                                                            <div>
+                                                                {{ result.name }}
+                                                            </div>
+                                                            <div class="np-result-description">
+                                                                {{ result.phone_number }}
+                                                                &nbsp; &nbsp;
+                                                                {{ result.email }}
+                                                                <br/>
+                                                                {{ result.address}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <strong>Customer Information:</strong><br>
+                                        <div id="customer_info" class="text-success mt-3" v-if="selectedCustomer.name !== ''">
+                                         <b>{{ selectedCustomer.name }}</b><br/>
+                                         <span class="text-primary" v-if=" selectedCustomer.phone_number.length >0 ||  selectedCustomer.email.length >0">{{ selectedCustomer.phone_number }} | {{ selectedCustomer.email }}</span>
+                                         <span v-if="selectedCustomer.address.length > 0"><br/>{{ selectedCustomer.address }}</span>
+                                        </div>
+                                    </div>
+                                    <h4>Invoice Property</h4>
+
+                                    <div class="form-group">
+                                        <label>Invoice Date</label>
+                                        <input readonly="" v-model="invoice_date" style="background-color: #FFF;color: #000;"   class="form-control form-control-sm" name="invoice_date">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Sales Representative</label>
+                                        <input class="form-control form-control-sm" :value="$user.name" style="background-color: #FFF;color:#000;"  disabled="">
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="well well-sm">
+                                            <h2 align="center" style="margin-top: 10px;"><span>NGN </span><span class="total_invoice">{{ $currency(invoiceTotal)}}</span></h2>
+                                        </div>
+                                    </div>
+
+                                    <br/>
+                                    <app-button class="btn-lg" :click="saveInvoice" ref="complete_purchase" design="success-block">
+                                        {{ id ===  undefined ? "Generate Invoice" : "Update Invoice"}}
+                                    </app-button>
+
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

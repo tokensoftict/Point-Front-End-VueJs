@@ -1,0 +1,162 @@
+<teleport to="body">
+    <div class="modal fade" id="newUserGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New User Group</h5>
+                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <form ref="newform">
+
+                        <div class="form-group">
+                            <label>Name</label>
+                            <app-textbox ref="name" :design="'sm'" key="name" :validate="true" :error-msg="'Enter Group Name'"  :name="'name'"  :type="'text'"  :model="'name'" :placeholder="'Group Name'"></app-textbox>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <app-button ref="submit_button"  :click="save">Create</app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</teleport>
+
+<teleport to="body">
+    <div class="modal fade" id="updateUserGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update User Group</h5>
+                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <form ref="updateform">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <app-textbox ref="update_name" :design="'sm'" key="update_name" :validate="true" :error-msg="'Enter Group Name'"  :name="'update_name'"  :type="'text'"  :model="'update_name'" :placeholder="'Group Name'"></app-textbox>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <app-button ref="update_button"  :click="updateGroup">Update</app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</teleport>
+
+<teleport to="body">
+    <div class="modal fade" id="groupPermission" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Group Permission</h5>
+                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <form ref="updateform">
+
+                        <div class="row">
+
+                            <div class="col-6 mt-2" v-for="module in modules">
+
+                                <div class="statbox panel box box-shadow" style="height: 150px; overflow: auto">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                <h4>{{ module.label }}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row" style="margin-top: -30px">
+                                            <div class="col-6" v-for="task in module['tasks']">
+                                                <div class="checkbox-primary custom-control custom-checkbox">
+                                                    <input type="checkbox" v-model="permissions[task.id]" :checked="task.permissions.length > 0" :value="task.id" class="custom-control-input" :id="task.route" />
+                                                    <label class="custom-control-label" style="padding-top: 4px;font-size: 10px;margin-top: 10px;" :for="task.route"> {{ task.description }} </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <app-button ref="permission_button"  :click="savePermsssions">Save</app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</teleport>
+
+<div class="row layout-top-spacing">
+    <div class="col-12 layout-spacing">
+        <div class="panel br-6 statbox box box-shadow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>User Group List</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="custom-table panel-body p-0">
+                    <v-client-table :data="tableData" ref="group_table" :columns="columns" :options="options">
+
+                        <template #beforeFilter>
+                            <button class="btn me-2 btn-primary" @click="newModal.show()"
+                            ><svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="feather feather-plus"
+                            >
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                                New User Group
+                            </button>
+
+                        </template>
+                        <template #No="props">
+                           {{ props.index }}
+                        </template>
+
+                        <template #Name="props">
+                                {{ props.row.name }}
+                        </template>
+
+                        <template #action="props">
+                            <a href="javascript:;"  class=" btn btn-sm btn-primary" @click="edit(props.row)">
+                                <i class="far fa-1x fa-edit"></i>
+                            </a>
+
+                            &nbsp; &nbsp;
+
+                            <button type="button" @click="fetchPermission(props.row.id)" class=" btn btn-sm btn-success" >
+                                <i class="far fa-1x fa-user"></i>  Permissions
+                            </button>
+
+                        </template>
+                    </v-client-table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

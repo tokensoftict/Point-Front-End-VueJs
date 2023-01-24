@@ -26,5 +26,24 @@ export class CustomerService {
         return this.$http.post("customerManager/customer/"+id,data);
     }
 
+    search(search)
+    {
+        return this.$http.post("customerManager/customer/find/",search);
+    }
+
+    phoneSearch(phoneNumber)
+    {
+        return this.$http.post('customerManager/customer/findByphone/',{phoneNumber : phoneNumber});
+    }
+
+    balanceSheet(filter)
+    {
+        return this.$http.post('customerManager/customer/balancesheet/',filter);
+    }
+
+    creditors()
+    {
+        return this.$http.get('customerManager/customer/creditors');
+    }
 
 }

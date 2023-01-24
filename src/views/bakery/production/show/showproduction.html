@@ -42,6 +42,8 @@
 
                                                         <p class="inv-customer-name"> Remark: {{ remark }}</p>
 
+                                                        <p class="inv-customer-name"> Status: {{ production.status.name }}</p>
+
                                                     </div>
 
                                                     <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1">
@@ -52,6 +54,12 @@
 
                                                             <p>
                                                                 <span class="inv-subtitle">Time:</span> <span>{{ time }}</span>
+                                                            </p>
+                                                            <p>
+                                                                <span class="inv-subtitle">Created by:</span> <span>{{ production.created_by.name }}</span>
+                                                            </p>
+                                                            <p>
+                                                                <span class="inv-subtitle">Completed by:</span> <span>{{ production?.completed_by?.name }}</span>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -103,16 +111,20 @@
                                                             <thead>
                                                             <tr>
                                                                 <th class="text-start">Product Name</th>
-                                                                <th class="text-center">Quantity</th>
                                                                 <th class="text-center">Selling Price</th>
-                                                                <th class="text-end">Total</th>
+                                                                <th class="text-center">Est. Quantity</th>
+                                                                <th class="text-end">Est. Total</th>
+                                                                <th class="text-center">Actual Quantity</th>
+                                                                <th class="text-end">Actual Total</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
                                                             <tr v-for="(product_item, index) in product_Items">
                                                                 <td class="text-left">{{ (product_item.name) }}</td>
-                                                                <td class="text-center">{{ (product_item.quantity) }}</td>
                                                                 <td class="text-center">{{ $currency(product_item.selling_price) }}</td>
+                                                                <td class="text-center">{{ (product_item.estimate_quantity) }}</td>
+                                                                <td class="text-end">{{ $currency((product_item.selling_price * product_item.estimate_quantity))  }}</td>
+                                                                <td class="text-center">{{ (product_item.quantity) }}</td>
                                                                 <td class="text-end">{{ $currency((product_item.selling_price * product_item.quantity))  }}</td>
                                                             </tr>
                                                             </tbody>
@@ -120,8 +132,10 @@
                                                             <tr>
                                                                 <td></td>
                                                                 <td></td>
+                                                                <td class="text-end">Ext. Total</td>
+                                                                <td class="text-end" id="total_po">{{ $currency(extimate_product_total) }}</td>
                                                                 <td class="text-end">Total</td>
-                                                                <td class="text-end" id="total_po">{{ $currency(product_total) }}</td>
+                                                                <td class="text-end">{{ $currency(product_total) }}</td>
                                                             </tr>
                                                             </tfoot>
                                                         </table>
@@ -142,11 +156,11 @@
                             <div class="row">
 
                                 <div class="col-xl-12 col-md-3 col-sm-6">
-                                    <router-link v-if="production.status.name !== 'Complete'" :to="{name : 'edit-productions', params: {id: id}}" class="btn btn-dark btn-edit">Edit</router-link>
+                                    <router-link v-if="$user.access.includes('/bakeryManager/productions/:id/edit') &&  production.status.name === 'Draft' " :to="{name : 'edit-productions', params: {id: id}}" class="btn btn-dark btn-edit">Edit</router-link>
                                 </div>
                                 <div class="col-xl-12 col-md-3 col-sm-6">
 
-                                    <router-link v-if="production.status.name !== 'Complete'" :to="{name : 'complete-productions', params: {id: id}}" class="mt-3 btn btn-primary btn-edit">Complete</router-link>
+                                    <router-link v-if="$user.access.includes('/bakeryManager/productions/:id/complete') &&  production.status.name === 'Approved'" :to="{name : 'complete-productions', params: {id: id}}" class="mt-3 btn btn-primary btn-edit">Complete</router-link>
 
                                 </div>
                             </div>

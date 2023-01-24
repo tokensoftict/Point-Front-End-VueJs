@@ -22,4 +22,7 @@ export class TransferService {
         return this.$http.get("bakeryManager/transfer/"+id+"/decline");
     }
 
+    custom(filter) {
+        return this.$http.post("bakeryManager/transfer",filter);
+    }
 }

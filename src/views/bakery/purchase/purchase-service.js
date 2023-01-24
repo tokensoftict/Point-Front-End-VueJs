@@ -1,8 +1,12 @@
+import {SupplierService} from "../../settings/supplier/supplier-service";
+import {AccessControl} from "../../accesscontrol/access-control";
 
 export class PurchaseService {
 
     constructor(http) {
         this.$http = http;
+        this.$suppler = new SupplierService(this.$http);
+        this.$accessControl = new AccessControl(this.$http);
     }
 
 
@@ -47,4 +51,9 @@ export class PurchaseService {
         return this.$http.get("purchaseorders/purchaseorders/"+id+"/markAsComplete");
     }
 
+
+    custom(filter)
+    {
+        return this.$http.post("purchaseorders/purchaseorders/custom",filter);
+    }
 }

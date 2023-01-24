@@ -4,6 +4,16 @@
 
 export default {
 
+
+  methods : {
+
+      logout()
+      {
+        this.$user.logout(this);
+      }
+  }
+
+
 }
 
 </script>

@@ -54,6 +54,14 @@ export default {
       });
       return purchase_total;
     },
+    estimate_product_total(){
+      let product_total = 0;
+      this.product_Items.forEach((item,index) => {
+        product_total += (item.estimate_quantity * item.selling_price);
+      });
+      return product_total;
+    },
+
     product_total(){
       let product_total = 0;
       this.product_Items.forEach((item,index) => {
@@ -92,7 +100,12 @@ export default {
       name : "",
       remark : "",
       // for product
-
+      production : {
+        id : "",
+        status : {
+          name : ""
+        }
+      },
       product_selected : null,
       product_results: [],
       product_isLoading : false,
@@ -192,7 +205,7 @@ export default {
     addProduct(){
       let existing = false;
       this.product_Items.forEach((item,index) => {
-        if(item.id === this.selected.id){
+        if(item.id === this.product_selected.id){
           existing = true;
         }
       });
@@ -213,7 +226,7 @@ export default {
         const item = {
           id: this.product_selected.id,
           selling_price: this.product_selected.selling_price,
-          quantity: this.$refs.product_quantity.getValue(),
+          estimate_quantity: this.$refs.product_quantity.getValue(),
           name: this.product_selected.name,
         }
 
@@ -262,22 +275,23 @@ export default {
 
     completeProduction()
     {
+      this.isSubmittedLoading = true;
       this.productionService.post(this.prepare_data,this.id)
           .then((response)=>{
 
               if(this.id !== undefined)
               {
-                this.$helper.success(this.$notify,"Production has been created successful");
+                this.$helper.success(this.$notify,"Production has been updated successful");
               }
              else
               {
-                this.$helper.success(this.$notify,"Production has been updated successful");
+                this.$helper.success(this.$notify,"Production has been created successful");
+                this.materialItems = [];
+                this.product_Items = [];
+                document.getElementById("myform").reset();
               }
 
-             this.materialItems = [];
-             this.product_Items = [];
-             document.getElementById("myform").reset();
-             this.$refs.form_wizard.reset();
+            this.$refs.form_wizard.reset();
           });
     },
 

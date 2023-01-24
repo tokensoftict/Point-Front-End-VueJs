@@ -3,9 +3,24 @@
 <script>
 
 
-import {ProductionService} from "../production-service";
+import {ProductionService} from "../production-service.js";
+import textbox from "../../../../components/html/textbox.vue";
+import button from "../../../../components/html/button.vue";
+import textarea from "../../../../components/html/textarea.vue";
+import file from "../../../../components/html/file.vue";
+import select from "../../../../components/html/select.vue";
+import production from "../../../../components/html/production.vue";
 
 export default {
+
+  components: {
+    'app-textbox': textbox,
+    'app-button': button,
+    'app-textarea': textarea,
+    'app-file': file,
+    'app-production': production,
+    'app-select': select,
+  },
 
   data() {
     return {

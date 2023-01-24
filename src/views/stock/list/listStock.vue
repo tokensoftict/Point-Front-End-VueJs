@@ -41,7 +41,7 @@ export default {
                     filterPlaceholder: 'Search...',
                     limit: 'Results:',
                 },
-                sortable: ['id', 'type', 'action'],
+                sortable: ['id', 'type'],
                 sortIcon: {
                     base: 'sort-icon-none',
                     up: 'sort-icon-asc',
@@ -51,6 +51,23 @@ export default {
             },
         }
     },
+
+  methods:{
+    toggle(id)
+    {
+      this.stockService.toggle(id).then(()=>{
+        this.get()
+      });
+    },
+    get()
+    {
+      this.stockService.get().then((response) => {
+
+        this.tableData = response.data.data.data;
+        this.columns =  response.data.data.columns;
+      });
+    }
+  },
 
     computed :{
 
@@ -68,11 +85,7 @@ export default {
 
     mounted() {
 
-        this.stockService.get().then((response) => {
-
-            this.tableData = response.data.data.data;
-            this.columns =  response.data.data.columns;
-        });
+        this.get()
 
     }
 

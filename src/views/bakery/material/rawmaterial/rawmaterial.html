@@ -54,13 +54,13 @@
                             {{ props.row.materialtype.name }}
                         </template>
                         <template #action="props">
-                            <a href="javascript:;"  class=" btn btn-sm btn-primary" @click="edit(props.row)">
+                            <a href="javascript:;" v-if="$user.access.includes('/bakeryManager/editrawmaterials')"  class=" btn btn-sm btn-primary" @click="edit(props.row)">
                                 <i class="far fa-1x fa-edit"></i>
                             </a>
 
                             &nbsp; &nbsp;
 
-                            <a href="javascript:;" class=" text-white btn btn-sm btn-dark" @click="toggle(props.row.id)">
+                            <a href="javascript:;" v-if="$user.access.includes('/bakeryManager/togglerawmaterials')"  class=" text-white btn btn-sm btn-dark" @click="toggle(props.row.id)">
                                 <i class="far fa-1x fa-hourglass"></i>
                             </a>
 
@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div class="col-3 layout-spacing">
+    <div class="col-3 layout-spacing" v-if="$user.access.includes('/bakeryManager/newrawmaterials')">
         <div class="panel br-6 statbox box box-shadow">
             <div class="panel-heading">
                 <div class="row">

@@ -1,0 +1,175 @@
+<div class="row layout-top-spacing">
+    <div class="col-6 layout-spacing">
+        <div class="panel br-6 statbox box box-shadow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>Add New Credit Payment</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="panel br-6 statbox box box-shadow">
+                            <app-textbox ref="customer_id" placeholder="Enter Customer Phone Number"></app-textbox>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <app-button :click="fetchCustomer" ref="proceed" design="primary-block" class="btn-lg">Proceed </app-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel br-6 statbox box box-shadow mt-3"  v-if="status === true">
+            <div class="panel-body">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                            <h4>Customer Credit Information</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+
+                    <div class="form-group">
+                        <label>Full Name</label><br>
+                        <b class="text-primary">{{ customer["name"] }}</b>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label><br>
+                        <b class="text-primary">{{ customer["phone_number"] }}</b>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Email Address</label><br>
+                        <b class="text-primary">{{ customer["email"] }}</b>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label><br>
+                        <b class="text-primary">{{ customer["address"] }}</b>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Credit Balance</label><br>
+                        <b class="text-primary">{{ customer['credit_balance_formatted'] }}</b>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Last Payment Date</label><br>
+                        <b class="text-primary">{{ customer['last_payment_date'] }}</b>
+                    </div>
+                    <hr class="bg-primary"/>
+                    <div class="form-group">
+                        <label>Amount </label><br>
+                        <input type="number" placeholder="Amount Customer Wants to Pay" v-model="amount" class="form-control form-control-lg"/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 layout-spacing">
+        <div class="panel br-6 statbox box box-shadow" v-if="status === true">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>Payment Information</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <div class="faq">
+                        <div class="faq-layouting layout-spacing">
+                            <div class="fq-tab-section layout-top-spacing" style="padding: 0px;margin-top:0;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="accordion" id="simple_faq">
+
+                                            <div v-for="(method,index) in methods" class="card">
+                                                <div v-if="method.id !== 4" class="card-header" @click="payment_method = method.id" role="tab">
+                                                    <div class="mb-0" :class="index > 0 ? 'collapsed' : ''" role="menu" data-bs-toggle="collapse"
+                                                         :data-bs-target="'#fqcollapse'+index"
+                                                         aria-expanded="false"
+                                                         :aria-controls="'fqcollapse'+index">
+                                                        <div class="checkbox-primary custom-control custom-checkbox rounded">
+                                                            <input type="radio" :value="method.id" v-model="payment_method"  :checked="index<=0" class="custom-control-input" :id="'chkrd_primary'+index" />
+                                                            <label class="custom-control-label" :for="'chkrd_primary'+index">  </label>
+                                                        </div>
+                                                        <span class="faq-q-title">
+                                                            {{ method.name }}</span>
+                                                        <div class="icons">
+                                                            <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="24"
+                                                                    height="24"
+                                                                    viewBox="0 0 24 24"
+                                                                    fill="none"
+                                                                    stroke="currentColor"
+                                                                    stroke-width="2"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round"
+                                                                    class="feather feather-chevron-down"
+                                                            >
+                                                                <polyline points="6 9 12 15 18 9"></polyline>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div :id="'fqcollapse'+index" :class="index === 0 ? 'show' : ''" class="collapse" :aria-labelledby="'fqcollapse'+index" data-bs-parent="#simple_faq">
+                                                    <div class="card-body">
+                                                        <div v-if="method.id === 1">
+                                                            <div class="form-control">
+                                                                <input type="number" v-model="cash_tendered" placeholder="Enter Cash Tendered" class="form-control form-control-lg">
+                                                            </div>
+                                                            <div class="card card-body bg-light mt-2 text-center" >
+                                                                <span class="d-block text-center">Customer Change</span>
+                                                                <h3 class="mt-2">
+                                                                    {{ $currency(((cash_tendered - amount) < 0 ? 0 : (cash_tendered - amount))) }}
+                                                                </h3>
+
+                                                            </div>
+                                                        </div>
+                                                        <div v-if="method.id === 2 ">
+                                                            <div class="form-group ">
+                                                                <label>Select Bank</label>
+                                                                <select v-model="pos_bank_id" class="form-control-lg form-control">
+                                                                    <option value="">Select Bank</option>
+                                                                    <option v-for="bank in banks" :value="bank.id">{{ bank.bank.name }} - {{ bank.account_number }} {{ bank.account_name }} </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div v-if=" method.id === 3">
+                                                            <div class="form-group ">
+                                                                <label>Select Bank</label>
+                                                                <select v-model="transfer_bank_id" class="form-control-lg form-control">
+                                                                    <option value="">Select Bank</option>
+                                                                    <option v-for="bank in banks" :value="bank.id">{{ bank.bank.name }} - {{ bank.account_number }} {{ bank.account_name }} </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <app-button design="primary-block" ref="processpayment" :click="processPayment" class="btn-lg float-end">PAY NOW</app-button>
+                    <br/>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
