@@ -358,7 +358,7 @@
                 </ul>
 
             </li>
-            <li class="menu" v-if="$user.hasModuleAccess('/invoice/new') || $user.hasModuleAccess('/invoice/completed') || $user.hasModuleAccess('/payment/listpaymentbymethod') ">
+            <li class="menu" v-if="$user.hasModuleAccess('/invoice/new') || $user.hasModuleAccess('/invoice/completed') || $user.hasModuleAccess('/invoice/paid') || $user.hasModuleAccess('/invoice/draft') ">
                 <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#invoicing" aria-controls="invoicing" aria-expanded="false">
                     <div class="">
                         <svg
@@ -404,6 +404,9 @@
                     </li>
                     <li v-if="$user.access.includes('/invoice/draft')">
                         <router-link to="/invoice/draft" >Draft Invoice</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/invoice/paid')">
+                        <router-link to="/invoice/paid" >Paid Invoice</router-link>
                     </li>
                     <li v-if="$user.access.includes('/invoice/completed')">
                         <router-link to="/invoice/completed">Completed Invoice</router-link>
@@ -579,6 +582,68 @@
 
                     <li v-if="$user.access.includes('/bakeryManager/production/report/monthly/user')">
                         <router-link to="/bakeryManager/production/report/monthly/user" >Monthly By User</router-link>
+                    </li>
+
+                </ul>
+
+            </li>
+            <li class="menu"  v-if="$user.hasModuleAccess('/payment/report')">
+                <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#paymentReport" aria-controls="paymentReport" aria-expanded="false">
+                    <div class="">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-layers"
+                        >
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                        <span>Payment Report</span>
+                    </div>
+                    <div>
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
+                        >
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+
+                <ul id="paymentReport" class="collapse submenu list-unstyled" data-bs-parent="#paymentReport">
+
+                    <li v-if="$user.access.includes('/payment/report/daily')">
+                        <router-link to="/payment/report/daily">Daily Payment</router-link>
+                    </li>
+                    <li  v-if="$user.access.includes('/payment/report/weekly')">
+                        <router-link to="/payment/report/weekly">Weekly Payment</router-link>
+                    </li>
+                    <li  v-if="$user.access.includes('/payment/report/monthly')">
+                        <router-link to="/payment/report/monthly" >Monthly Payment</router-link>
+                    </li>
+
+                    <li v-if="$user.access.includes('/payment/report/monthly/customer')">
+                        <router-link to="/payment/report/monthly/customer" >Monthly By Customer</router-link>
+                    </li>
+
+                    <li v-if="$user.access.includes('/payment/report/monthly/user')">
+                        <router-link to="/payment/report/monthly/user" >Monthly By User</router-link>
                     </li>
 
                 </ul>

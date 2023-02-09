@@ -33,13 +33,26 @@
       &nbsp; &nbsp;
       <router-link v-if="$user.access.includes('/bakeryManager/purchase/:id/complete') && props.row.Status.name !== 'Complete'" :to="{ name : 'edit-purchase-Material',  params: {id: props.row.id} }" class=" text-white btn btn-sm btn-success"><i class="far fa-1x fa-edit"></i></router-link>
     </template>
+
+
+    <template #afterBody>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>{{ $currency(total_purchase) }}</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </template>
   </v-client-table>
 </template>
 
 <script>
 
 export default {
-
 
   props : {
 
@@ -63,8 +76,18 @@ export default {
       default : ""
     }
 
-  }
+  },
 
+  computed : {
+    total_purchase() {
+      let total = 0;
+      this.tableData.forEach((item, index) => {
+        console.log(item['Total_']);
+        total += parseFloat(item['Total_'])
+      })
+      return total;
+    },
+  }
 }
 
 </script>

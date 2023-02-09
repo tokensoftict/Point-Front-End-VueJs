@@ -49,6 +49,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Discount</label><br>
+                        <b class="text-primary">{{ $currency(discount) }}</b>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Total</label><br>
+                        <b class="text-primary">{{ $currency((invoice["Sub Total_"] - discount)) }}</b>
+                    </div>
+
+                    <div class="form-group">
                         <label>Customer</label><br>
                         <b class="text-primary">{{ invoice["Customer"] }}</b>
                     </div>
@@ -64,6 +75,22 @@
                         <label>Date Created</label><br>
                         <b class="text-primary">{{ invoice["Date"] }}</b>
                     </div>
+
+                    <hr/>
+
+                    <h4>Apply Discount</h4>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="panel br-6 statbox box box-shadow">
+                                <app-textbox ref="discount_value" model="discount" type="number" placeholder="Discount Amount"></app-textbox>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <app-button :click="applydiscount" ref="apply" design="secondary-block" class="btn-lg">Apply Discount </app-button>
+                        </div>
+                    </div>
+
                     <!--
                     <table class="table table-bordered table-striped">
                         <tr>

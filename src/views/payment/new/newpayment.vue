@@ -36,6 +36,7 @@ export default {
       payment_method : 1,
       methods : [],
       status : false,
+      discount : 0,
       cash_tendered : "",
       pos_bank_id : "",
       transfer_bank_id : "",
@@ -119,9 +120,8 @@ export default {
       }
 
 
-      if(this.invoice["Sub Total_"] !== this.splitTotal)
+      if((this.invoice["Sub Total_"] - this.discount) !== this.splitTotal)
       {
-        console.log(this.invoice["Sub Total_"] +" "+ this.splitTotal);
         this.$helper.error(this.$notify,"Payment","Invalid total amount, amount not equal to invoice total");
         return false;
       }
@@ -168,7 +168,8 @@ export default {
       return {
         payment_method : this.payment_method,
         payment_data : this.payment_data,
-        invoice_id : this.invoice.ID
+        invoice_id : this.invoice.ID,
+        discount : this.discount
       }
     }
 
@@ -176,6 +177,21 @@ export default {
   },
 
   methods : {
+
+    applydiscount()
+    {
+        if(this.$refs.discount_value.getValue() === "")
+        {
+          this.$helper.error(this.$notify,"Payment","Please enter discount amount");
+          return
+        }
+        this.$refs.apply.toggleProcessing();
+        this.discount = this.$refs.discount_value.getValue();
+        setTimeout(()=>{
+          this.$helper.success(this.$notify,"Payment","Discount has been applied successfully")
+          this.$refs.apply.toggleProcessing();
+        },1800)
+    },
 
     fetchInvoice()
     {

@@ -54,6 +54,14 @@ export class InvoiceService {
         return this.$http.get("InvoiceManager/invoice/complete");
     }
 
+    markeAsComplete(id)
+    {
+        return this.$http.get("InvoiceManager/invoice/"+id+"/markAsComplete");
+    }
+
+    paid() {
+        return this.$http.get("InvoiceManager/invoice/paid");
+    }
 
     show(id) {
         return this.$http.get("InvoiceManager/invoice/"+id+"/show");

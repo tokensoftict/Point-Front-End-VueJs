@@ -24,6 +24,21 @@
       </div>
     </template>
 
+    <template #afterBody>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>{{ $currency(totalInvoice) }}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </template>
+
   </v-client-table>
 
 </template>
@@ -55,6 +70,16 @@ export default {
       default : ""
     }
 
+  },
+
+  computed : {
+    totalInvoice(){
+      let total = 0;
+      this.tableData.forEach((item,index) => {
+        total+=parseFloat(item['total_paid'])
+      })
+      return total;
+    }
   }
 
 }

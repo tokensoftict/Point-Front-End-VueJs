@@ -58,6 +58,7 @@ import weeklyproductionreport from "../views/bakery/production/weeklyproductionr
 import monthlyproductionreport from "../views/bakery/production/monthlyproductionreport/monthlyproductionreport.vue";
 import monthlyproductionreportbyuser
   from "../views/bakery/production/monthlyproductionreportbyuser/monthlyproductionreportbyuser.vue";
+import paidInvoice from "../views/invoice/paidInvoice/paidInvoice.vue";
 
 
 const routes = [
@@ -527,6 +528,13 @@ const routes = [
         component : completedInvoice
       },
       {
+        path : "paid",
+        name : "invoice.paid",
+        title : "List Paid Invoice",
+        props: true,
+        component : paidInvoice
+      },
+      {
         path : ":id/show",
         name : "invoice.show",
         title : "View Invoice",
@@ -551,6 +559,13 @@ const routes = [
         path : "/printThermal",
         name : "/printThermal",
         title : "Print Thermal",
+        props: true,
+        component : newInvoice
+      },
+      {
+        path : "/completeInvoice",
+        name : "/completeInvoice",
+        title : "Complete Invoice",
         props: true,
         component : newInvoice
       },
@@ -657,7 +672,7 @@ const routes = [
         path : "monthly/user",
         name : "user.monthly.payment.report",
         title : "User Monthly Payment Report",
-        component : dailypaymentreport
+        component : montlypaymentreport
       },
     ],
     meta: { requiresAuth: true }

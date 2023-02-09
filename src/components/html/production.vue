@@ -61,6 +61,24 @@
       </div>
     </template>
 
+
+    <template #afterBody>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>{{ $currency(totalMaterial) }}</th>
+        <th>{{ $currency(totalProduct) }}</th>
+        <th>{{ $currency(totalProfit) }}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </template>
+
+
     <!--
         <template #Action="props">
             <router-link :to="{ name : 'edit-productions',  params: {id: props.row.id} }" class=" text-white btn btn-sm btn-primary"><i class="far fa-1x fa-edit"></i></router-link>
@@ -96,7 +114,33 @@ export default {
       default : ""
     }
 
+  },
+
+  computed : {
+    totalMaterial(){
+      let total = 0;
+      this.tableData.forEach((item,index) => {
+        total+=parseFloat(item['total_material'])
+      })
+      return total;
+    },
+    totalProduct(){
+      let total = 0;
+      this.tableData.forEach((item,index) => {
+        total+=parseFloat(item['total_product'])
+      })
+      return total;
+    },
+
+    totalProfit(){
+      let total = 0;
+      this.tableData.forEach((item,index) => {
+        total+=parseFloat(item['profit'])
+      })
+      return total;
+    },
   }
+
 
 }
 

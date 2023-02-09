@@ -75,6 +75,37 @@ export default {
       });
     }
 
+  },
+
+  methods : {
+
+    completeInvoice()
+    {
+      this.$refs.completeInvoice.toggleProcessing();
+      this.invoiceService.markeAsComplete(this.id).then((response)=>{
+        this.$refs.completeInvoice.toggleProcessing();
+          if(response.data.data.status === true)
+          {
+            this.products = response.data.data.invoice.items
+            this.invoice_date = response.data.data.invoice.formatted_invoice_date;
+            console.log(response.data.data.invoice.customer);
+            this.selectedCustomer = response.data.data.invoice.customer;
+            this.status = response.data.data.invoice.status;
+            this.time = response.data.data.invoice.sales_time;
+            this.created_by = response.data.data.invoice.created_by;
+            this.invoice_number = response.data.data.invoice.invoice_number
+
+            this.$helper.success(this.$notify,"Invoice Report","Invoice has been completed successfully!")
+          }
+          else
+          {
+            response.data.data.errors.forEach((message,index)=>{
+              this.$helper.error(this.$notify,"Invoice Report",message)
+            });
+          }
+      })
+    }
+
   }
 
 }

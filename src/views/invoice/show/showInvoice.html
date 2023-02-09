@@ -115,8 +115,7 @@
                                 </tfoot>
                             </table>
 
-
-
+                            <app-button v-if="$user.access.includes('/invoice//completeInvoice') && status.name==='Paid'" design="primary-block" ref="completeInvoice" :click="completeInvoice" class="btn-lg float-end">Complete Invoice</app-button>
                         </div>
                     </div>
                 </div>
