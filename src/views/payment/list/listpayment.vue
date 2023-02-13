@@ -39,6 +39,17 @@ export default {
     },
   },
 
+  methods : {
+      get()
+      {
+        this.paymentService.get().then(
+            (response)=>{
+              this.payments = response.data.data.data;
+              this.columns = response.data.data.columns;
+            })
+      }
+  },
+
   mounted() {
     this.paymentService.get().then(
         (response)=>{

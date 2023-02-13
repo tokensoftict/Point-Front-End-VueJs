@@ -24,10 +24,9 @@ export const useUserStore = defineStore({
                         {
                             self[_key] = response.data.data[_key];
                         }
-                        console.log(JSON.stringify(response.data.data));
+                        response.data.data['default_branch'] = response.data.data['mybranches'][0]['id'];
                         localStorage.setItem("token",response.data.data.token);
                         localStorage.setItem("user",JSON.stringify(response.data.data));
-
 
 
                         self.access = response.data.data.permission.map((pmsn)=>{
@@ -103,6 +102,8 @@ export const useUserStore = defineStore({
                 });
             }
 
+            data['default_branch'] =data['mybranches'][0]['id'];
+
             return data;
         },
         islogin(){
@@ -111,6 +112,13 @@ export const useUserStore = defineStore({
             let token  = localStorage.getItem("token");
             return !!(user && token);
 
+        },
+        setDefaultBranch(value)
+        {
+            let data = JSON.parse(localStorage.getItem("user"));
+             data['default_branch'] = value;
+            localStorage.setItem("user",JSON.stringify(data));
+            this['default_branch'] = value;
         }
     }
 });

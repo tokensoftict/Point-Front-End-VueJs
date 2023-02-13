@@ -42,7 +42,14 @@ export default
   },
 
   methods: {
-
+    get()
+    {
+      this.invoiceService.draft()
+          .then((response)=> {
+            this.invoiceList = response.data.data.data
+            this.columns = response.data.data.columns
+          });
+    }
   },
 
   mounted() {

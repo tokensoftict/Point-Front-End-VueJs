@@ -1,0 +1,128 @@
+
+<teleport to="body">
+    <div class="modal fade" id="editBranch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Branch</h5>
+                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <form ref="updateform">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <app-textbox ref="update_name" :design="'sm'" key="update_name" :validate="true" :error-msg="'Enter Branch Name'"  :name="'update_name'"  :type="'text'"  :model="'update_name'" :placeholder="'Branch Name'"></app-textbox>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Branch Address 1</label>
+                            <app-textbox ref="update_address_1" :design="'sm'" key="update_address_1" :validate="true" :error-msg="'Enter Branch Address Line 1'"  :name="'update_address_1'"  :type="'text'"  :model="'update_address_1'" :placeholder="'Branch Address 1'"></app-textbox>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Branch Address 2</label>
+                            <app-textbox ref="update_address_2" :design="'sm'" key="update_address_2" :validate="true" :error-msg="'Enter Branch Address Line 2'"  :name="'update_address_2'"  :type="'text'"  :model="'update_address_2'" :placeholder="'Branch Address Line 2'"></app-textbox>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Branch Phone Number</label>
+                            <app-textbox ref="update_phone" :design="'sm'" key="update_phone" :validate="true" :error-msg="'Enter Branch Phone Number'"  :name="'update_phone'"  :type="'text'"  :model="'update_phone'" :placeholder="'Branch Phone Number'"></app-textbox>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <app-button ref="update_button"  :click="updateBranch">Save Changes</app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</teleport>
+
+<div class="row layout-top-spacing">
+    <div class="col-9 layout-spacing">
+        <div class="panel br-6 statbox box box-shadow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>Branch List</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="custom-table panel-body p-0">
+                    <v-client-table :data="tableData" ref="bank_table" :columns="columns" :options="options">
+                        <template #action="props">
+                            <a href="javascript:;"  class=" btn btn-sm btn-primary" @click="edit(props.row)">
+                                <i class="far fa-1x fa-edit"></i>
+                            </a>
+                        </template>
+
+                        <template #Name="props">
+                            {{ props.row.name }}
+                        </template>
+
+                        <template #Address_1="props">
+                            {{ props.row.address_1 }}
+                        </template>
+
+                        <template #Address_2="props">
+                            {{ props.row.address_2 }}
+                        </template>
+
+                        <template #Phone="props">
+                            {{ props.row.phone }}
+                        </template>
+
+                    </v-client-table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 layout-spacing">
+        <div class="panel br-6 statbox box box-shadow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>New Branch</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="panel-body p-0">
+                    <form ref="newform">
+
+                        <div class="form-group">
+                            <label>Name</label>
+                            <app-textbox ref="name" :design="'sm'" key="name" :validate="true" :error-msg="'Enter Branch Name'"  :name="'name'"  :type="'text'"  :model="'name'" :placeholder="'Branch Name'"></app-textbox>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Branch Address 1</label>
+                            <app-textbox ref="address_1" :design="'sm'" key="address_1" :validate="true" :error-msg="'Enter Branch 1'"  :name="'address_1'"  :type="'text'"  :model="'address_1'" :placeholder="'Branch Address 1'"></app-textbox>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Branch Address 2</label>
+                            <app-textbox ref="address_2" :design="'sm'" key="address_2" :validate="true" :error-msg="'Enter Branch Address Line 2'"  :name="'address_2'"  :type="'text'"  :model="'address_2'" :placeholder="'Branch Address Line 2'"></app-textbox>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Branch Phone Number</label>
+                            <app-textbox ref="phone" :design="'sm'" key="phone" :validate="true" :error-msg="'Enter Branch Phone Number'"  :name="'phone'"  :type="'text'"  :model="'phone'" :placeholder="'Branch Phone Number'"></app-textbox>
+                        </div>
+
+
+                        <div class="field-wrapper">
+                            <app-button ref="submit_button"  :click="save">Save</app-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

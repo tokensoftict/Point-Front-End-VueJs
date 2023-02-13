@@ -1,4 +1,18 @@
 <template>
+
+  <div class=" flex-wrap justify-content-center justify-content-sm-start">
+
+    <vue3-json-excel v-if="columns.length > 0" type="xls" class="btn btn-primary m-1" name="purchase-order-table.xls" :fields="columns" :json-data="tableData">Export Excel</vue3-json-excel>
+
+    <vue3-json-excel v-if="columns.length > 0" type="csv" class="btn btn-secondary m-1" name="purchase-order-table.csv" :fields="columns" :json-data="tableData">Export CSV</vue3-json-excel>
+
+
+    <div class="float-end">
+      <app-branch  design="sm" shift="40px" :refresh="refresh" :nolabel="false"></app-branch>
+    </div>
+
+  </div>
+
   <v-client-table :data="tableData" v-if="$user.access.includes('/bakeryManager/purchase/add')" ref="customer_table" :columns="columns" :options="options">
     <template #beforeFilter>
       <router-link to="/bakeryManager/purchase/add" class="btn me-2 btn-primary">New Material Purchase
@@ -41,8 +55,9 @@
         <th></th>
         <th></th>
         <th></th>
-        <th></th>
         <th>{{ $currency(total_purchase) }}</th>
+        <th></th>
+        <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -51,8 +66,14 @@
 </template>
 
 <script>
+import branch from "./branch.vue";
 
 export default {
+
+  components:{
+    'app-branch' : branch
+  },
+
 
   props : {
 
@@ -74,6 +95,14 @@ export default {
     _ref: {
       type : String,
       default : ""
+    },
+
+    refresh :{
+      type : Function,
+      default : {
+        return (){
+        }
+      }
     }
 
   },

@@ -66,6 +66,7 @@ import select from "../../../components/html/select.vue";
 import { NumberSpinner } from 'vue3-number-spinner'
 import {InvoiceService} from "../invoice-service";
 import _ from "lodash";
+import branch from "../../../components/html/branch.vue";
 export default
 {
 
@@ -75,7 +76,8 @@ export default
     'app-textarea': textarea,
     'app-file': file,
     'app-select': select,
-    'app-number-spinner' :  NumberSpinner
+    'app-number-spinner' :  NumberSpinner,
+    'app-branch' : branch
   },
 
   data()
@@ -93,7 +95,8 @@ export default
         "email" : "",
         "id" : ""
       },
-      invoice_date : this.$user.settings.date
+      invoice_date : this.$user.settings.date,
+      branch_id : ""
     }
   },
 
@@ -131,6 +134,11 @@ export default
   },
 
   methods: {
+
+    resetProduct()
+    {
+      this.products = [];
+    },
 
     productSearch(event)
     {
@@ -321,7 +329,7 @@ export default
         this.invoiceService.show(this.id).then((response)=>{
             this.products = response.data.data.items
             this.invoice_date = response.data.data.invoice_date;
-
+            this.branch_id =response.data.data.branch_id;
             this.selectedCustomer = response.data.data.customer;
         });
       }

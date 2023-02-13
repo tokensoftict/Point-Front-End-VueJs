@@ -1,5 +1,19 @@
 <template>
 
+  <div class="flex-wrap justify-content-center justify-content-sm-start col-12">
+
+    <vue3-json-excel v-if="columns.length > 0" type="xls" class="btn btn-primary m-1" name="invoice-table.xls" :fields="columns" :json-data="tableData">Export Excel</vue3-json-excel>
+
+    <vue3-json-excel v-if="columns.length > 0" type="csv" class="btn btn-secondary m-1" name="invoice-table.xls" :fields="columns" :json-data="tableData">Export CSV</vue3-json-excel>
+
+    <div class="float-end">
+      <app-branch  design="sm" shift="40px" :refresh="refresh" :nolabel="false"></app-branch>
+    </div>
+
+  </div>
+
+
+
   <v-client-table :data="tableData" :ref="_ref" :columns="columns" :options="options">
 
     <template #Status="props">
@@ -32,6 +46,7 @@
           <th></th>
           <th></th>
           <th></th>
+          <th></th>
           <th>{{ $currency(totalInvoice) }}</th>
           <th></th>
           <th></th>
@@ -47,8 +62,15 @@
 
 <script>
 
+
+
+import branch from "./branch.vue";
+
 export default {
 
+  components:{
+    'app-branch' : branch
+  },
 
   props : {
 
@@ -70,6 +92,14 @@ export default {
     _ref: {
       type : String,
       default : ""
+    },
+
+    refresh :{
+      type : Function,
+      default : {
+        return (){
+        }
+      }
     }
 
   },

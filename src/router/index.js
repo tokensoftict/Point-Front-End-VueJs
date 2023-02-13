@@ -59,6 +59,8 @@ import monthlyproductionreport from "../views/bakery/production/monthlyproductio
 import monthlyproductionreportbyuser
   from "../views/bakery/production/monthlyproductionreportbyuser/monthlyproductionreportbyuser.vue";
 import paidInvoice from "../views/invoice/paidInvoice/paidInvoice.vue";
+import branch from "../views/settings/branch/branch.vue";
+import dailypaymentbymethodbyuser from "../views/payment/dailypaymentbymethodbyuser/dailypaymentbymethodbyuser.vue";
 
 
 const routes = [
@@ -173,6 +175,27 @@ const routes = [
         title : "Edit Manufacturer",
         component : manufacturer
       },
+
+      {
+        path : "branch",
+        name : "settings.list.branch",
+        title : "List Branch",
+        component : branch
+      },
+      {
+        path : "newbranch",
+        name : "settings.create.branch",
+        title : "Create New Branch",
+        component : branch
+      },
+      {
+        path : "editbranch",
+        name : "settings.edit.branch",
+        title : "Edit Branch",
+        component : branch
+      },
+
+
       {
         path : "productcategory",
         name : "settings.productcategory",
@@ -673,6 +696,12 @@ const routes = [
         name : "user.monthly.payment.report",
         title : "User Monthly Payment Report",
         component : montlypaymentreport
+      },
+      {
+        path : "daily/method/user",
+        name : "user.daily.user.method.payment.report",
+        title : "Daily Payment Report By Method and By user",
+        component : dailypaymentbymethodbyuser
       },
     ],
     meta: { requiresAuth: true }

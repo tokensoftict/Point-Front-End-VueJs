@@ -4,7 +4,12 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                        <h4>Raw Material List</h4>
+                        <h4>Available Raw Material</h4>
+
+                        <div class="float-end">
+                            <app-branch :refresh="getData" design="sm" shift="40px"></app-branch>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -18,6 +23,10 @@
 
                         <template #Quantity="props">
                             {{ props.row.quantity }}
+                        </template>
+
+                        <template #Branch="props">
+                            {{ props.row.branch }}
                         </template>
 
                         <template #status="props">

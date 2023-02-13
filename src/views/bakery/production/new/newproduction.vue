@@ -17,6 +17,7 @@ import '@suadelabs/vue3-multiselect/dist/vue3-multiselect.css';
 import {RawmaterialService} from "../../material/rawmaterial-service";
 import {StockService} from "../../../stock/stockService";
 import {ProductionService} from "../production-service";
+import branch from "../../../../components/html/branch.vue";
 
 
 
@@ -29,6 +30,7 @@ export default {
     'app-textarea': textarea,
     'app-file': file,
     'app-select': select,
+    'app-branch' : branch,
     Multiselect : Multiselect
   },
 
@@ -104,7 +106,8 @@ export default {
         id : "",
         status : {
           name : ""
-        }
+        },
+        branch_id : ""
       },
       product_selected : null,
       product_results: [],
@@ -140,7 +143,7 @@ export default {
         }
       });
 
-      if(this.$refs.quantity.getValue() > this.selected.quantity)
+      if(parseInt(this.$refs.quantity.getValue()) > parseInt(this.selected.quantity))
       {
         this.$refs.quantity.showError("Quantity can not be more than "+this.selected.quantity);
         return ;

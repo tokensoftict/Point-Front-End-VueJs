@@ -1,4 +1,4 @@
-<template src="./listpaymentbymethod.html"></template>
+<template src="./dailypaymentbymethodbyuser.html"></template>
 
 
 <script>
@@ -31,7 +31,9 @@ export default {
       payments : [],
       columns : [],
       options : [],
-      keys : []
+      keys : [],
+      from : this.$user.settings.date,
+      users : []
     }
   },
 
@@ -46,18 +48,31 @@ export default {
 
     getPaymentList()
     {
-      this.paymentService.payment_by_method().then(
+      this.$refs.go.toggleProcessing();
+      this.paymentService.payment_by_method_custom({'filter':{'between':[this.from,this.from],"user_id":this.$refs.user_id.getValue()}}).then(
           (response)=>{
             this.columns = response.data.data.columns;
             this.keys = Object.keys(response.data.data.data)
             this.payments =  response.data.data.data;
+            this.$refs.go.toggleProcessing();
           })
     }
 
   },
 
   mounted() {
-    this.getPaymentList();
+    this.$refs.go.toggleProcessing();
+    this.paymentService.$accessControl.getUsers().then((users)=>{
+      this.users = users.data.data;
+      this.paymentService.payment_by_method_custom({'filter':{'between':[this.from,this.from],"user_id":1}}).then(
+          (response)=>{
+            this.columns = response.data.data.columns;
+            this.keys = Object.keys(response.data.data.data)
+            this.payments =  response.data.data.data;
+            this.$refs.go.toggleProcessing();
+          })
+    });
+
   }
 }
 

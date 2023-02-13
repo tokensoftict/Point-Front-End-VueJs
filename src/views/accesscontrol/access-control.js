@@ -1,10 +1,12 @@
 import {CustomerService} from "../customermanager/customer/customer-service";
 import {StockService} from "../stock/stockService";
+import {BranchService} from "../settings/branch/branch-service";
 
 export class AccessControl {
 
     constructor(http) {
         this.$http = http;
+        this.$branchService = new BranchService(this.$http);
     }
 
     get() {

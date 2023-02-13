@@ -219,9 +219,17 @@ export default {
       this.modules = [];
       this.updateGroupPermission.show();
       this.selectpermission = id;
+      this.permissions = [];
       this.accessControl.permissions(id).then((response)=>{
         this.modules = response.data.data.data.modules
-
+        this.modules.forEach((item, index)=>{
+              item['tasks'].forEach((task, task_index) =>{
+                  if(task.permissions.length > 0)
+                  {
+                    this.permissions[task.id] = true;
+                  }
+              });
+        });
       });
     }
 

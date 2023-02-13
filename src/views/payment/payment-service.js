@@ -1,4 +1,5 @@
 import {CustomerService} from "../customermanager/customer/customer-service";
+import {AccessControl} from "../accesscontrol/access-control";
 
 
 export class PaymentService {
@@ -7,6 +8,7 @@ export class PaymentService {
     constructor(http) {
         this.$http = http;
         this.$customer = new CustomerService(this.$http)
+        this.$accessControl = new AccessControl(this.$http)
     }
 
     get() {
@@ -39,6 +41,11 @@ export class PaymentService {
     custom(filter)
     {
         return this.$http.post("PaymentManager/payment/custom",filter);
+    }
+
+    payment_by_method_custom(filter)
+    {
+        return this.$http.post("PaymentManager/payment/payment_by_method_custom",filter);
     }
 
 }

@@ -574,10 +574,10 @@
                         <router-link to="/bakeryManager/production/report/daily">Daily Production</router-link>
                     </li>
                     <li  v-if="$user.access.includes('/bakeryManager/production/report/weekly')">
-                        <router-link to="/bakeryManager/production/report/weekly">Weekly Payment</router-link>
+                        <router-link to="/bakeryManager/production/report/weekly">Weekly Production</router-link>
                     </li>
                     <li  v-if="$user.access.includes('/bakeryManager/production/report/monthly')">
-                        <router-link to="/bakeryManager/production/report/monthly" >Monthly Payment</router-link>
+                        <router-link to="/bakeryManager/production/report/monthly" >Monthly Production</router-link>
                     </li>
 
                     <li v-if="$user.access.includes('/bakeryManager/production/report/monthly/user')">
@@ -644,6 +644,10 @@
 
                     <li v-if="$user.access.includes('/payment/report/monthly/user')">
                         <router-link to="/payment/report/monthly/user" >Monthly By User</router-link>
+                    </li>
+
+                    <li v-if="$user.access.includes('/payment/report/daily/method/user')">
+                        <router-link to="/payment/report/daily/method/user" >Daily By Method</router-link>
                     </li>
 
                 </ul>
@@ -831,6 +835,9 @@
                     </li>
                     <li v-if="$user.access.includes('/settings/banks')">
                         <router-link to="/settings/banks">Banks</router-link>
+                    </li>
+                    <li v-if="$user.access.includes('/settings/branch')">
+                        <router-link to="/settings/branch">Branch</router-link>
                     </li>
                 </ul>
 

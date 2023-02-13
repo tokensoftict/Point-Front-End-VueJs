@@ -7,11 +7,17 @@ const instance = axios.create()
 
 instance.interceptors.request.use(function (request) {
 
-
     let user =  useUserStore();
 
     if(user.token === false) {
          user.refresh();
+    }
+
+    console.log(user['default_branch']);
+
+    if( user['default_branch'] !== undefined)
+    {
+        request.params =  {"branch_id" : user['default_branch']}
     }
 
     if(user.token !== false) {
@@ -60,7 +66,7 @@ instance.interceptors.response.use((response) => response, (error) => {
 
    const  error_codes = ['500']
 
-    if(error.response.data.message !== undefined && error.response.data.message === "Unauthenticated." && error.response.status !== 422 ){
+    if(error.response && error.response.data.message !== undefined && error.response.data.message === "Unauthenticated." && error.response.status !== 422 ){
 
 
 
@@ -77,7 +83,7 @@ instance.interceptors.response.use((response) => response, (error) => {
 
         return Promise.reject(error);
 
-    }else if(error_codes.includes(error.response.status)){
+    }else if(error.response && error_codes.includes(error.response.status)){
 
         notify({
             title: "Server Error",

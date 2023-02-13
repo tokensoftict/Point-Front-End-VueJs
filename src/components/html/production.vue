@@ -1,4 +1,17 @@
 <template>
+
+  <div class=" flex-wrap justify-content-center justify-content-sm-start">
+
+    <vue3-json-excel v-if="columns.length > 0" type="xls" class="btn btn-primary m-1" name="production-table.xls" :fields="columns" :json-data="tableData">Export Excel</vue3-json-excel>
+
+    <vue3-json-excel v-if="columns.length > 0" type="csv" class="btn btn-secondary m-1" name="production-table.csv" :fields="columns" :json-data="tableData">Export CSV</vue3-json-excel>
+
+    <div class="float-end">
+      <app-branch  design="sm" shift="40px" :refresh="refresh" :nolabel="false"></app-branch>
+    </div>
+
+  </div>
+
   <v-client-table :data="tableData" v-if="$user.access.includes('/bakeryManager/production/new')" :ref="_ref" :columns="columns" :options="options" style="overflow: visible">
     <template #beforeFilter>
       <router-link to="/bakeryManager/production/new" class="btn me-2 btn-primary">New Production
@@ -88,8 +101,11 @@
 </template>
 
 <script>
-
+import branch from "./branch.vue";
 export default {
+  components:{
+    'app-branch' : branch
+  },
 
 
   props : {
@@ -112,6 +128,14 @@ export default {
     _ref: {
       type : String,
       default : ""
+    },
+
+    refresh :{
+      type : Function,
+      default : {
+        return (){
+        }
+      }
     }
 
   },

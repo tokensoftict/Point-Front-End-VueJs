@@ -12,6 +12,8 @@ import select from "../../../components/html/select.vue";
 import file from "../../../components/html/file.vue";
 import {StockService} from "../stockService";
 import {useUserStore} from "../../../stores/user";
+import branch from "../../../components/html/branch.vue";
+
 
 
 export default {
@@ -21,7 +23,8 @@ export default {
         'app-button': button,
         'app-textarea': textarea,
         'app-file': file,
-        'app-select': select
+        'app-select': select,
+        'app-branch' : branch
     },
 
   methods:{

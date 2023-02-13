@@ -13,8 +13,11 @@
 <script>
 
 
+import branch from "./components/html/branch.vue";
+
 export default {
   components: {
+    'app-branch' : branch
   },
   data() {
     return {

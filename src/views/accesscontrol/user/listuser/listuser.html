@@ -262,6 +262,27 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group mb-0">
+                                                        <label>Select Branch</label>
+                                                        <multiselect
+                                                                    v-model="params.branch_id"
+                                                                     :multiple="true"
+                                                                     :options="branches"
+                                                                     :searchable="true"
+                                                                     track-by="name"
+                                                                     label="name"
+                                                                     :preselect-first="true"
+                                                                     selected-label=""
+                                                                     select-label=""
+                                                                     deselect-label=""
+                                                        ></multiselect>
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

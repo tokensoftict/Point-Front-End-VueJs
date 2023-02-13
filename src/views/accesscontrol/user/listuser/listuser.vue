@@ -19,6 +19,7 @@ import button from "../../../../components/html/button.vue";
 import textarea from "../../../../components/html/textarea.vue";
 import file from "../../../../components/html/file.vue";
 import select from "../../../../components/html/select.vue";
+import Multiselect from "@suadelabs/vue3-multiselect";
 
 
 export default {
@@ -28,19 +29,21 @@ export default {
     'app-button': button,
     'app-textarea': textarea,
     'app-file': file,
-    'app-select' : select
+    'app-select' : select,
+    Multiselect : Multiselect
   },
 
   data()
   {
     return {
-      params : ref({ id: null, name: '', email: '', username : '' ,password: null, usergroup_id:'' ,phone: '' }),
+      params : ref({ id: null, name: '', email: '', username : '' ,password: null, usergroup_id:'' ,phone: '', branch_id : ''  }),
       contacts_list :[],
       filterd_contacts_list : ref([]),
       search_user : '',
       ids : ref([]),
       grid_type : ref('list'),
-      groups : ref([])
+      groups : ref([]),
+      branches : ref([])
     }
   },
 
@@ -92,6 +95,10 @@ export default {
       }
 
       this.$refs.saveUser.toggleProcessing();
+      const removeKeys = ['permission' ,'token' , 'user_token', 'created_at', 'updated_at', 'last_login' , 'status','email_verified_at','settings'];
+      removeKeys.forEach((item, index)=>{
+          delete this.params[item];
+      })
       this.accessControl.post(this.params.id,this.params).then((response)=>{
         this.$refs.saveUser.toggleProcessing();
         if(response.data.data.id)
@@ -104,7 +111,7 @@ export default {
     },
 
     add_user(){
-      this.params =  ref({ id: null, name: '', email: '', username : '' ,password: null, usergroup_id:'' ,phone: '' });
+      this.params =  ref({ id: null, name: '', email: '', username : '' ,password: null, usergroup_id:'' ,phone: '', branch_id : '' });
       this.params.id = null;
       this.addContactModal.show();
     },
@@ -116,6 +123,17 @@ export default {
     search_contacts()
     {
       this.filterd_contacts_list =ref( this.contacts_list.filter((d) => d.name.toLowerCase().includes(this.search_user)));
+    },
+
+    getBranches()
+    {
+      this.accessControl.$branchService.get().then((response)=>{
+
+        for(let key in response.data.data)
+        {
+          this.branches.push({id:response.data.data[key]['id'],'name':response.data.data[key]['name']})
+        }
+      });
     }
 
   },
@@ -124,6 +142,7 @@ export default {
 
     this.getGroups();
     this.getUsers();
+    this.getBranches();
   }
 
 }

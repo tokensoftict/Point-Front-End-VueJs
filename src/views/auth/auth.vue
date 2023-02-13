@@ -72,7 +72,13 @@ export default {
 
         }
 
-    }
+    },
 
+    mounted() {
+      this.$nextTick(function(){
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+      });
+    }
 }
 </script>

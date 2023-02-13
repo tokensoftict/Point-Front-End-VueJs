@@ -43,6 +43,15 @@ export default
 
   methods: {
 
+    get()
+    {
+      this.invoiceService.complete()
+          .then((response)=> {
+            this.invoiceList = response.data.data.data
+            this.columns = response.data.data.columns
+          });
+    }
+
   },
 
   mounted() {
@@ -53,6 +62,8 @@ export default
            this.columns = response.data.data.columns
         });
   }
+
+
 
 
 }

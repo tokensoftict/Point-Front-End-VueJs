@@ -14,10 +14,7 @@ import {PurchaseService} from "../purchase-service";
 import {SupplierService} from "../../../settings/supplier/supplier-service";
 import select from "../../../../components/html/select.vue";
 import {RawmaterialService} from "../../material/rawmaterial-service";
-
-
-
-
+import branch from "../../../../components/html/branch.vue";
 
 export default {
 
@@ -28,6 +25,7 @@ export default {
         'app-textarea': textarea,
         'app-file': file,
         'app-select': select,
+        'app-branch': branch
     },
 
     computed: {

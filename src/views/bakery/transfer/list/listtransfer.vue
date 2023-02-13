@@ -5,13 +5,16 @@
 import {TransferService} from "../transfer-service";
 import transfer from "../../../../components/html/transfer.vue";
 import button from "../../../../components/html/button.vue";
+import branch from "../../../../components/html/branch.vue";
+
 
 
 export default {
 
   components:{
     'app-transfer' : transfer,
-    'app-button' : button
+    'app-button' : button,
+    'app-branch' :  branch
   },
 
   data() {

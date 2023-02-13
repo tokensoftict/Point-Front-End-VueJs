@@ -5,25 +5,28 @@
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                         <h4>  Material Transfer Request List</h4>
-                        <div class="float-end">
+                        <div class="float-end col-8">
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-9">
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div :class="this.$user.mybranches.length > 1 ? 'col-3' : 'col-6' ">
                                             <div class="form-group">
                                                 <label for="currency">From</label>
                                                 <flat-pickr v-model="from" class="form-control form-control-sm flatpickr active" placeholder="Date"></flat-pickr>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div  :class="this.$user.mybranches.length > 1 ? 'col-3' : 'col-6' ">
                                             <div class="form-group">
                                                 <label for="currency">To</label>
                                                 <flat-pickr v-model="to" class="form-control form-control-sm flatpickr active" placeholder="Date"></flat-pickr>
                                             </div>
                                         </div>
+                                        <div class="col-3">
+                                            <app-branch  design="sm" :refresh="filterTransfer" shift="40px"></app-branch>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <label class="d-block" style="visibility: hidden">&nbsp;</label>
                                     <app-button  :click="filterTransfer" ref="go">Go</app-button>
                                 </div>

@@ -40,7 +40,7 @@
             </div>
             <div class="panel-body">
                 <div class="custom-table panel-body p-0">
-                    <app-purchase :data="purchaseList" ref="customer_table" :columns="columns" :options="options"></app-purchase>
+                    <app-purchase :tableData="purchaseList" :refresh="filterReport" ref="customer_table" :columns="columns" :options="options"></app-purchase>
                 </div>
             </div>
         </div>
