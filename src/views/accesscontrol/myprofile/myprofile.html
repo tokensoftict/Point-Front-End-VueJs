@@ -1,0 +1,63 @@
+<div class="row layout-top-spacing">
+    <div class="col-6 layout-spacing">
+        <div class="panel br-6 statbox box box-shadow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>Update Profile</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-12">
+                        <form id="addContactModalTitle">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label>Name</label>
+                                        <input type="text" v-model="params.name" class="form-control" placeholder="Name" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label>Email</label>
+                                        <input type="text" v-model="params.email" class="form-control" placeholder="Email" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label>Username</label>
+                                        <input type="text" v-model="params.username" class="form-control" placeholder="Username" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label>Phone Number</label>
+                                        <input type="text" v-model="params.phone" class="form-control" placeholder="Phone Number" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group mb-0">
+                                        <label>Password</label>
+                                        <input type="password" v-model="params.password" class="form-control" placeholder="Password" />
+                                        <span class="text-success">Leave blank, if you dont want to change your password</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>  <br/>
+                            <app-button type="button" design="primary" :click="updateProfile" ref="saveUser">{{ params.id ? 'Update Profile' : 'Update Profile' }}</app-button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

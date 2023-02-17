@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group" :style="'margin-right: '+shift" v-if="this.$user.mybranches.length > 0">
+  <div class="form-group" :style="'margin-right: '+shift" v-if="this.$user.mybranches.length > 1">
     <label for="currency" v-if="nolabel === true">Branch</label>
     <select ref="textbox" :style="'width :'+width"  v-model="_branch_id" :name="name"  :class="{
         'form-control' : design === 'default',

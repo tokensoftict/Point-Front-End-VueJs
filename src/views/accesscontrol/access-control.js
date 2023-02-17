@@ -50,6 +50,11 @@ export class AccessControl {
         return this.$http.get("access-control/user");
     }
 
+    updateProfile(data)
+    {
+        return this.$http.post("access-control/user/myprofile",data);
+    }
+
     post(id,data)
     {
         if(id!== null) return this.updateUser(data,id);

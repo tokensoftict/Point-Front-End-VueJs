@@ -61,11 +61,28 @@ import monthlyproductionreportbyuser
 import paidInvoice from "../views/invoice/paidInvoice/paidInvoice.vue";
 import branch from "../views/settings/branch/branch.vue";
 import dailypaymentbymethodbyuser from "../views/payment/dailypaymentbymethodbyuser/dailypaymentbymethodbyuser.vue";
+import myprofile from "../views/accesscontrol/myprofile/myprofile.vue";
 
 
 const routes = [
 
   { path: '/', name: 'Login', component: Auth },
+
+  {
+    path: '/myprofile',
+    name : "AppMyprofile",
+    component : AppLayout,
+    children : [
+      {
+        path : "",
+        name : "My Profile",
+        title : "My Profile",
+        component : myprofile
+      },
+
+    ],
+    meta: { requiresAuth: true }
+  },
 
   {
     path: '/dashboard',
