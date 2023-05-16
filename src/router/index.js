@@ -62,6 +62,7 @@ import paidInvoice from "../views/invoice/paidInvoice/paidInvoice.vue";
 import branch from "../views/settings/branch/branch.vue";
 import dailypaymentbymethodbyuser from "../views/payment/dailypaymentbymethodbyuser/dailypaymentbymethodbyuser.vue";
 import myprofile from "../views/accesscontrol/myprofile/myprofile.vue";
+import monthlyreportbyproduct from "../views/invoice/monthlyreportbyproduct/monthlyreportbyproduct.vue";
 
 
 const routes = [
@@ -674,6 +675,12 @@ const routes = [
         name : "user.monthly.invoice.report",
         title : "User Monthly Invoice report",
         component : montlyinvoicereportbyuser
+      },
+      {
+        path : "monthly/by_product",
+        name : "user.by_product.monthly.invoice.report",
+        title : "Product Monthly Invoice report",
+        component : monthlyreportbyproduct
       },
     ],
     meta: { requiresAuth: true }

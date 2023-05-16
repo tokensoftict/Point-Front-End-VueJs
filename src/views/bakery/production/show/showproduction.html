@@ -1,8 +1,45 @@
+<teleport to="body">
+    <div class="modal fade" id="viewproduction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View Production Logs</h5>
+                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th  class="text-center">No of Bags</th>
+                            <th  class="text-center">Quantity Produced</th>
+                            <th  class="text-center">Rough</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(item, index) in logItems">
+                            <td>{{ index + 1 }}</td>
+                            <td  class="text-center">{{ item.bags }} Bag(s) of Flour</td>
+                            <td class="text-center">{{ item.quantity }}</td>
+                            <td  class="text-center">{{ item.rough }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</teleport>
+
+
 <div class="row invoice layout-top-spacing layout-spacing apps-invoice">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="doc-container">
             <div class="row">
-                <div class="col-xl-9">
+                <div class="col-xl-12">
                     <div class="invoice-container">
                         <div class="invoice-inbox">
                             <div id="ct" class="">
@@ -116,6 +153,7 @@
                                                                 <th class="text-end">Est. Total</th>
                                                                 <th class="text-center">Actual Quantity</th>
                                                                 <th class="text-end">Actual Total</th>
+                                                                <th class="text-end">Action</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -126,6 +164,9 @@
                                                                 <td class="text-end">{{ $currency((product_item.selling_price * product_item.estimate_quantity))  }}</td>
                                                                 <td class="text-center">{{ (product_item.quantity) }}</td>
                                                                 <td class="text-end">{{ $currency((product_item.selling_price * product_item.quantity))  }}</td>
+                                                                <td class="text-end">
+                                                                    <button @click="viewLog(product_item.id)"  class="btn-sm btn-success btn" > View </button>
+                                                                </td>
                                                             </tr>
                                                             </tbody>
                                                             <tfoot>

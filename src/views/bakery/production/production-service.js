@@ -59,4 +59,20 @@ export class ProductionService {
         return this.$http.post("bakeryManager/production/custom",filter);
     }
 
+
+    log(stock_id, production_id, data)
+    {
+        return this.$http.post("bakeryManager/production/logproduction/"+production_id+"/"+stock_id, data)
+    }
+
+    view(stock_id, production_id)
+    {
+        return this.$http.get("bakeryManager/production/viewproduction/"+production_id+"/"+stock_id)
+    }
+
+    removeLog(id)
+    {
+        return this.$http.delete("bakeryManager/production/log/destroy/"+id);
+    }
+
 }

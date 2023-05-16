@@ -77,4 +77,9 @@ export class InvoiceService {
         return this.$http.post("InvoiceManager/invoice/daily",filter);
     }
 
+    by_product(filter)
+    {
+        return this.$http.post("InvoiceManager/invoice/by_product",filter)
+    }
+
 }

@@ -27,15 +27,29 @@ export default {
     return {
       submitted  : false,
       product_Items: [],
+      logItems : [],
+      stock_id : "",
+      new_controls: ["bags","quantity","rough"]
     }
   },
 
   computed : {
+
+    addLogModal()
+    {
+      return  new bootstrap.Modal(document.getElementById('addproduction'), {})
+    },
+    viewLogModal()
+    {
+      return  new bootstrap.Modal(document.getElementById('viewproduction'), {})
+    },
+
     prepare_data(){
       return {
         products : this.product_Items
       }
     },
+
     productionService()
     {
       return new ProductionService(this.$api);
@@ -60,6 +74,90 @@ export default {
         this.product_Items = response.data.data["bakery_production_products_items"];
 
       })
+    },
+
+    viewLog(stock_id){
+      this.logItems = [];
+      this.stock_id = stock_id;
+      this.viewLogModal.show();
+
+      this.productionService.view(stock_id, this.id).then((response)=>{
+        console.log(response.data);
+        let logs = response.data.data.data
+        logs.map((item) => {
+          item['buttonstatus'] = false;
+          return item;
+        });
+        this.logItems = logs;
+      })
+
+    },
+
+    deleteLog(log_id)
+    {
+      if(confirm("Are you sure, you want delete this log") === true) {
+
+        this.logItems = this.logItems.map((item) => {
+          if(item.id == log_id){
+            item['buttonstatus'] = true;
+          }
+          return item;
+        });
+
+        this.productionService.removeLog(log_id)
+            .then((response) => {
+              this.product_Items = [];
+              this.getProduction();
+              this.$notify({
+                title: "Point",
+                type: "success",
+                text: "Log as been deleted successfully"
+              })
+
+              this.viewLogModal.hide();
+
+            });
+      }
+    },
+
+    addLog()
+    {
+      if (this.$helper.validateSingle(this.$refs, this.new_controls) === false) {
+
+        this.$refs.addlog.toggleProcessing();
+
+        const data = new FormData;
+
+        for (let key of this.new_controls) {
+
+          data.set(key.replace("update_",""), this.$refs[key].getValue());
+
+        }
+
+        this.productionService.log(this.stock_id, this.id, data)
+            .then((response) =>{
+              this.logItems = response.data.data.data;
+
+              this.$notify({
+                title: "Point",
+                type: "success",
+                text: "Log as been added successfully"
+              })
+
+              this.$refs.addlog.toggleProcessing();
+
+              for (let key of this.new_controls) {
+                this.$refs[key].setValue("");
+              }
+
+              this.product_Items = [];
+
+              this.getProduction();
+
+              this.viewLogModal.hide();
+
+            });
+      }
     },
 
     toggleError(index)
@@ -95,7 +193,7 @@ export default {
       this.productionService.complete(this.prepare_data,this.id)
           .then((response)=>{
 
-            this.$helper.success(this.$notify,"Production has been completed successful and quantity has been transfered successfully");
+            this.$helper.success(this.$notify,"Production has been completed successful and quantity has been transferred successfully");
 
             this.$router.push({name :"show-productions",params:{id : this.id}})
 

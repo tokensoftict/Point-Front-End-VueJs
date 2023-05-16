@@ -1,6 +1,71 @@
 
+<teleport to="body">
+    <div class="modal fade" id="viewproduction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View Production Logs</h5>
+                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th  class="text-center">No of Bags</th>
+                                <th  class="text-center">Quantity Produced</th>
+                                <th  class="text-center">Rough</th>
+                                <th  class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr v-for="(item, index) in logItems">
+                                    <td>{{ index + 1 }}</td>
+                                    <td  class="text-center">{{ item.bags }} Bag(s) of Flour</td>
+                                    <td class="text-center">{{ item.quantity }}</td>
+                                    <td  class="text-center">{{ item.rough }}</td>
+                                    <td>
+                                        <button
+                                                :disabled="item.buttonstatus === true"
+                                                @click="deleteLog(item.id)"  class="btn-sm btn-danger btn" >
+                                            Delete
+                                            <span v-if="item.buttonstatus === true" class="spinner-border text-white me-2 align-self-center loader-sm">Loading...</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <app-textbox placeholder="No of Bags" ref="bags" :validate="true" :error-msg="'Enter No of  Bags'" design="sm"></app-textbox>
+                                </td>
+                                <td>
+                                    <app-textbox placeholder="Quantity" ref="quantity" design="sm" :validate="true" :error-msg="'Enter Quantity Produce'"></app-textbox>
+
+                                </td>
+                                <td>
+                                    <app-textbox placeholder="Rough" ref="rough" design="sm" :validate="true" :error-msg="'Enter Rough'"></app-textbox>
+
+                                </td>
+                                <td>
+                                    <app-button :click="addLog" ref="addlog" design="primary">Add</app-button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</teleport>
+
+
+
 <div class="row layout-top-spacing">
-    <div class="col-9 layout-spacing">
+    <div class="col-12 layout-spacing">
         <div class="panel br-6 statbox box box-shadow">
             <div class="panel-heading">
                 <div class="row">
@@ -19,8 +84,9 @@
                                 <th class="text-start">Product Name</th>
                                 <th class="text-start">Selling Price</th>
                                 <th class="text-center">Ext. Quantity</th>
-                                <th class="text-center">Quantity Produced</th>
+                                <th class="text-center">Total Qty Produced</th>
                                 <th class="text-start">Total</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -30,10 +96,16 @@
                                 <td class="text-center">{{ $currency(product_item.selling_price) }}</td>
                                 <td class="text-center">{{ product_item.estimate_quantity }}</td>
                                 <td class="text-center">
+                                    {{ product_item.quantity }}
+                                    <!--
                                     <input type="number" @input="toggleError(index)" placeholder="Quantity Produced" class="form-control form-control-sm" v-model="product_Items[index]['quantity']">
                                     <small v-if="( product_Items[index]['error_status'] === true )"  class="block text-danger ">Value must be greater than zero </small>
+                                    -->
                                 </td>
                                 <td class="text-end">{{ $currency((product_item.selling_price * product_item.quantity))  }}</td>
+                                <td>
+                                    <button @click="viewLog(product_item.id)"  class="btn-sm btn-success btn" > View </button>
+                                </td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -44,6 +116,7 @@
                                 <td></td>
                                 <td class="text-end">Total</td>
                                 <th class="text-end" id="total_po">{{ $currency(product_total) }}</th>
+                                <td></td>
                             </tr>
                             </tfoot>
                         </table>

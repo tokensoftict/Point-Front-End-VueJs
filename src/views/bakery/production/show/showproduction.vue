@@ -17,6 +17,11 @@ export default {
 
   computed: {
 
+    viewLogModal()
+    {
+      return  new bootstrap.Modal(document.getElementById('viewproduction'), {})
+    },
+
     productionService()
     {
       return new ProductionService(this.$api);
@@ -49,6 +54,7 @@ export default {
     return {
       product_Items : [],
       materialItems : [],
+      logItems : [],
       date : null,
       time : null,
       name : "",
@@ -73,7 +79,17 @@ export default {
     print(){
       window.print()
     },
+    viewLog(stock_id){
+      this.logItems = [];
+      this.stock_id = stock_id;
+      this.viewLogModal.show();
 
+      this.productionService.view(stock_id, this.id).then((response)=>{
+        console.log(response.data);
+        this.logItems = response.data.data.data
+      })
+
+    },
     getProduction()
     {
       this.productionService.show(this.id)
