@@ -90,10 +90,10 @@ export default
       filteredCustomer : [],
       products :  [],
       selectedCustomer : {
-        "name": "",
-        "phone_number" : "",
-        "email" : "",
-        "id" : ""
+        "name": "Generic Customer",
+        "phone_number" : "No Phone Number",
+        "email" : "No Email Address",
+        "id" : 1
       },
       invoice_date : this.$user.settings.date,
       branch_id : ""
@@ -257,8 +257,12 @@ export default
     {
       if(this.selectedCustomer.name === "")
       {
-        this.$helper.error(this.$notify,"Invoice","Please select a customer");
-        return false;
+        //this.$helper.error(this.$notify,"Invoice","Please select a customer");
+        //return false;
+        this.selectedCustomer.id = 1;
+        this.selectedCustomer.name = "Generic Customer";
+        this.selectedCustomer.phone_number = "No Phone Number"
+        this.selectedCustomer.phone_number = "No Email Address"
       }
 
       if(this.invoice_date === "")
@@ -293,13 +297,15 @@ export default
               if(this.id === undefined)
               {
                 this.$helper.success(this.$notify,"Invoice","Invoice has been Generated Successfully");
+                setTimeout(()=> {
+                  this.$router.push({name : 'payment.new', params : {"id":data.data.invoice_number}});
+                },1200)
               }
               else
               {
                 this.$helper.success(this.$notify,"Invoice","Invoice has been Updated Successfully");
-
                 setTimeout(()=> {
-                    this.$router.push({name : 'show-invoice', param : {"id":this.id}});
+                    this.$router.push({name : 'payment.new', params : {"id":data.data.invoice_number}});
                 },1200)
 
               }

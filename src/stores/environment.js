@@ -4,7 +4,7 @@ export default {
     },
 
     production : {
-        baseUrl : 'http://post.softybread.com.ng/api/',
+        baseUrl : 'http://127.0.0.1:8000/api/',
     },
 
 }

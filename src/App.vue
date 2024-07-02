@@ -30,7 +30,6 @@ export default {
   },
   mounted() {
     this.$user.refresh();
-    /*
     let routes = [];
     this.$router.options.routes.forEach(route => {
       if(route.path !== "/" && route.path !== "/dashboard" && route.path !== "/myprofile") {
@@ -56,7 +55,7 @@ export default {
        this.$api.post("settings/store/syncTask",{'routes' : routes}).then((response)=>{});
     }
 
-    */
+
 
     setInterval(function(){
       var elem = document.getElementsByClassName('VueTables__table');

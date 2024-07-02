@@ -186,14 +186,14 @@
                                                     <div class="np-result-item" @click="selectCustomer(result)">
                                                         <div class="np-ib np-text-container">
                                                             <div>
-                                                                {{ result.name }}
+                                                                {{ result?.name }}
                                                             </div>
                                                             <div class="np-result-description">
-                                                                {{ result.phone_number }}
+                                                                {{ result?.phone_number }}
                                                                 &nbsp; &nbsp;
-                                                                {{ result.email }}
+                                                                {{ result?.email }}
                                                                 <br/>
-                                                                {{ result.address}}
+                                                                {{ result?.address}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -206,8 +206,8 @@
                                         <strong>Customer Information:</strong><br>
                                         <div id="customer_info" class="text-success mt-3" v-if="selectedCustomer.name !== ''">
                                          <b>{{ selectedCustomer.name }}</b><br/>
-                                         <span class="text-primary" v-if=" selectedCustomer.phone_number.length >0 ||  selectedCustomer.email.length >0">{{ selectedCustomer.phone_number }} | {{ selectedCustomer.email }}</span>
-                                         <span v-if="selectedCustomer.address.length > 0"><br/>{{ selectedCustomer.address }}</span>
+                                         <span class="text-primary" v-if=" selectedCustomer?.phone_number?.length >0 ||  selectedCustomer?.email?.length >0">{{ selectedCustomer?.phone_number }} | {{ selectedCustomer?.email }}</span>
+                                         <span v-if="selectedCustomer?.address?.length > 0"><br/>{{ selectedCustomer?.address }}</span>
                                         </div>
                                     </div>
                                     <h4>Invoice Property</h4>

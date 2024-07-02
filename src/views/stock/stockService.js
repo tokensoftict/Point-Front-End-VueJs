@@ -69,4 +69,9 @@ export class StockService {
         return this.$http.post("stockmanager/stock/findAvailable", search)
     }
 
+
+    postNewStockBatch(data)
+    {
+        return this.$http.post("stockmanager/stock/receive_stock", data);
+    }
 }

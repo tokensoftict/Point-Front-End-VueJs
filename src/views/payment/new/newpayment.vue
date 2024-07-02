@@ -60,7 +60,12 @@ export default {
     }
 
   },
-
+  props : ["id"],
+  mounted() {
+    if(this.id !== undefined){
+      this.fetchInvoice(this.id);
+    }
+  },
   computed :{
 
     paymentService()
@@ -193,18 +198,22 @@ export default {
         },1800)
     },
 
-    fetchInvoice()
+    fetchInvoice(id = null)
     {
-
-      if(this.$refs.invoice_id.getValue() === ""){
+      if(id != null){
+        this.$refs.invoice_id.setValue(id);
+      }
+      if(this.$refs.invoice_id.getValue() === "" && id === ""){
         this.$helper.error(this.$notify,"Payment","Enter Invoice ID / Invoice Number");
         return false;
       }
+
+      const invoiceID = id ?? this.$refs.invoice_id.getValue();
       this.$refs.proceed.toggleProcessing();
       this.methods = [];
       this.invoice = {};
       this.status = false;
-      this.paymentService.invoice(this.$refs.invoice_id.getValue())
+      this.paymentService.invoice(invoiceID)
           .then((response) =>
           {
             this.$refs.proceed.toggleProcessing();
@@ -263,6 +272,11 @@ export default {
               this.banks = [];
               this.$refs.invoice_id.setValue("");
               this.$helper.success(this.$notify,"Payment","Payment has been processed Successfully!");
+              const recURL = response.data.data.data.receipt_url;
+              setTimeout(()=> {
+                this.$user.popMenu(recURL)
+                this.$router.push({name : 'invoice.new'});
+              },1500)
             }
             else
             {

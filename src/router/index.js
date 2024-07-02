@@ -63,7 +63,7 @@ import branch from "../views/settings/branch/branch.vue";
 import dailypaymentbymethodbyuser from "../views/payment/dailypaymentbymethodbyuser/dailypaymentbymethodbyuser.vue";
 import myprofile from "../views/accesscontrol/myprofile/myprofile.vue";
 import monthlyreportbyproduct from "../views/invoice/monthlyreportbyproduct/monthlyreportbyproduct.vue";
-
+import new_stock_recieved from "@/views/stock/recieved_stock/new_stock_recieved.vue";
 
 const routes = [
 
@@ -620,9 +620,10 @@ const routes = [
     component : AppLayout,
     children : [
       {
-        path : "new",
+        path : ":id/new",
         name : "payment.new",
         title : "New Invoice Payment",
+        props: true,
         component : newpayment
       },
       {
@@ -773,6 +774,12 @@ const routes = [
         title : "Toggle Stock",
         props: true,
         component : newStock
+      },
+      {
+        path : "received",
+        name : "stock.received",
+        title : "Receive New Stocks",
+        component : new_stock_recieved
       },
     ],
     meta: { requiresAuth: true }
