@@ -54,16 +54,16 @@ export default {
                 }).catch((response)=>{
 
                     obj.$refs.submit_button.toggleProcessing();
-
-                    if(typeof response === "object" && typeof response.error !== "undefined")
+                    console.log(response.response.data.error);
+                    if(typeof response === "object" && typeof response.response.data.error !== "undefined")
                     {
                         this.$helper.error(
                             this.$notify,
                             "Authentication",
-                            response.error
+                            response.response.data.error
                         )
 
-                        obj.error = response.error;
+                        obj.error = response.response.data.error;
 
                     }
 

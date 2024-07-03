@@ -272,8 +272,9 @@ export default {
               this.banks = [];
               this.$refs.invoice_id.setValue("");
               this.$helper.success(this.$notify,"Payment","Payment has been processed Successfully!");
-              const recURL = response.data.data.data.receipt_url;
+              const recURL = response.data.data.receipt_url;
               setTimeout(()=> {
+                console.log(response.data.data.receipt_url);
                 this.$user.popMenu(recURL)
                 this.$router.push({name : 'invoice.new'});
               },1500)
